@@ -11,20 +11,20 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Activity.PostNextActivity">
+        <activity android:name="com.gram.pictory.ui.main.Post.PostNextActivity">
 
         </activity>
-        <activity android:name=".Activity.LoginActivity">
+        <activity android:name="com.gram.pictory.ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.MainActivity"/>
-        <activity android:name=".Activity.SignUpActivity"/>
-        <activity android:name=".Activity.ProfileEditActivity"/>
-        <activity android:name=".Activity.FollowerActivity"/>
+        <activity android:name=".ui.main.MainActivity"/>
+        <activity android:name="com.gram.pictory.ui.signup.SignUpActivity"/>
+        <activity android:name=".ui.ProfileEditActivity"/>
+        <activity android:name=".ui.FollowerActivity"/>
     </application>
 
 </manifest>

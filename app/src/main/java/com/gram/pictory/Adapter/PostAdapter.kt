@@ -8,7 +8,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.gram.pictory.Activity.PostNextActivity
+import com.gram.pictory.ui.main.Post.PostNextActivity
 import com.gram.pictory.R
 import kotlinx.android.synthetic.main.item_photo.view.*
 
