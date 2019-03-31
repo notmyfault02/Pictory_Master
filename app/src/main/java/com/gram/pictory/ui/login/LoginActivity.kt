@@ -1,62 +1,37 @@
 package com.gram.pictory.ui.login
 
+import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.widget.Toast
-import com.gram.pictory.Connect.Connecter.api
-import com.gram.pictory.Model.LoginModel
 import com.gram.pictory.R
+import com.gram.pictory.Util.DataBindingActivity
+import com.gram.pictory.databinding.ActivityLoginBinding
 import com.gram.pictory.ui.main.MainActivity
 import com.gram.pictory.ui.signup.SignUpActivity
-import kotlinx.android.synthetic.main.activity_login.*
 import org.jetbrains.anko.startActivity
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : DataBindingActivity<ActivityLoginBinding>(), LoginNavigator {
+
+    override val layoutId: Int
+        get() = R.layout.activity_login
+
+    private val factory = LoginViewModelFactory(this)
+    private val viewModel: LoginViewModel by lazy {
+        ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login)
+        binding.vm = viewModel
 
-        loginBtn.setOnClickListener {
-            if (idEditText.text.toString().length == 0) {
-                Toast.makeText(this, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
-            }
-            else if(pwEditText.text.toString().length == 0) {
-                Toast.makeText(this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                startActivity<MainActivity>()
-            }
-        }
-        registerTextView.setOnClickListener {
-            startActivity<SignUpActivity>()
-            if (idEditText.text.isNullOrBlank()) {
-                Toast.makeText(this, "아이디를 입력해주세요", Toast.LENGTH_SHORT).show()
-            }
-            else if(pwEditText.text.isNullOrBlank()) {
-                Toast.makeText(this, "비밀번호를 입력해주세요", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                api.login(hashMapOf("id" to idEditText.text, "password" to pwEditText.text)).enqueue(object : Callback<LoginModel>{
-                    override fun onResponse(call: Call<LoginModel>?, response: Response<LoginModel>?) {
-                        response!!.body().accessToken
-                        response.body().refreshToken
-                        startActivity<MainActivity>()
-                    }
+    }
 
-                    override fun onFailure(call: Call<LoginModel>?, t: Throwable?) {
-                        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                    }
-                })
-            }
-        }
-        registerTextView.setOnClickListener {
-            startActivity<SignUpActivity>()
-        }
+    override fun intentToSignUp() {
+        startActivity<SignUpActivity>()
+    }
 
+    override fun intentToMain() {
+        startActivity<MainActivity>()
+        finish()
     }
 
 }

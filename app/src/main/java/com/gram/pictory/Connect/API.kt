@@ -8,14 +8,18 @@ import retrofit2.Call
 import retrofit2.http.*
 
 interface API {
+
+    //회원가입
     @POST("/signup/")
     @Headers("Content-Type:application/json")
     fun signUp(@Body body: Any?): Call<Unit>
 
+    //로그인
     @POST("/login/")
     @Headers("Content-Type:application/json")
     fun login(@Body body: Any?): Call<LoginModel>
 
+    //글 게시
     @POST("/post/")
     @Headers("Content-Type:application/json")
     fun post(@Body body: Any?): Call<Unit>
@@ -44,6 +48,7 @@ interface API {
     @Headers("Content-Type:application/json")
     fun postReply(@Path("postCode") postCode: Int, @Body body: Any?): Call<Unit>
 
+    //프로필 수정
     @PATCH("/postEdit/")
     @Headers("Content-Type:application/json")
     fun signEdit(@Body body: Any?): Call<Unit>
