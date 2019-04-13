@@ -30,7 +30,7 @@ class FollowerActivity: AppCompatActivity() {
                 call: Call<ArrayList<FollowerModel>>?,
                 response: Response<ArrayList<FollowerModel>>?
             ) {
-                followerData = response!!.body()
+                followerData = response!!.body()!!
             }
 
             override fun onFailure(call: Call<ArrayList<FollowerModel>>?, t: Throwable?) {

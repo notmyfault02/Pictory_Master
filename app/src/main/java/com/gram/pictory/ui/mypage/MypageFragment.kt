@@ -2,30 +2,33 @@ package com.gram.pictory.ui.mypage
 
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.support.v4.app.Fragment
+import android.support.v4.app.FragmentManager
 import android.view.*
 import com.gram.pictory.R
+import com.gram.pictory.Util.DataBindingFragment
+import com.gram.pictory.databinding.FragmentMypageBinding
 import com.gram.pictory.ui.FollowerActivity
 import com.gram.pictory.ui.ProfileEditActivity
 import kotlinx.android.synthetic.main.fragment_mypage.*
 import org.jetbrains.anko.support.v4.startActivity
 
-class MypageFragment : Fragment() {
+class MypageFragment : DataBindingFragment<FragmentMypageBinding>(), MyPageContract {
+
+    override val layoutId: Int
+        get() = com.gram.pictory.R.layout.fragment_mypage
+
+    private val fm: FragmentManager? by lazy { fragmentManager }
   
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
-        val view = inflater.inflate(R.layout.fragment_mypage, container, false)
+        val factory = MyPageViewModelFactory(this, activity!!.application)
 
-        return view
+        return rootView
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        button2.setOnClickListener {
-            startActivity<ProfileEditActivity>()
-        }
 
         see_follower.setOnClickListener {
             startActivity<FollowerActivity>()
@@ -70,6 +73,10 @@ class MypageFragment : Fragment() {
             }
         }
         return super.onContextItemSelected(item)
+    }
+
+    override fun goToEditProfile() {
+        startActivity<ProfileEditActivity>()
     }
 
 }

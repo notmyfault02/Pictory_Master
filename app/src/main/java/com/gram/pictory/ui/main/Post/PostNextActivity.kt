@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.WindowManager
 import com.gram.pictory.Connect.Connecter
+import com.gram.pictory.Util.getToken
 import kotlinx.android.synthetic.main.activity_post_next.*
 import kotlinx.android.synthetic.main.snippet_top_postbar.*
 import org.jetbrains.anko.image
@@ -37,7 +38,8 @@ class PostNextActivity : AppCompatActivity() {
         }
 
         tvPost.setOnClickListener {
-            Connecter.api.post(hashMapOf(
+            Connecter.api.post(
+                getToken(this@PostNextActivity), hashMapOf(
                 //"id" to idSignUpEditText.text,
                 "imgURL" to imageView2.image,
                 "postText" to postEditText.text

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.gram.pictory.Connect.Connecter.api
 import com.gram.pictory.R
+import com.gram.pictory.Util.getToken
 import kotlinx.android.synthetic.main.activity_profile_edit.*
 import org.jetbrains.anko.toast
 
@@ -16,7 +17,8 @@ class ProfileEditActivity: AppCompatActivity() {
             or pwSignUpEditText.text.isNullOrBlank() or birthEditText.text.isNullOrBlank()) {
             toast("정보를 모두 입력해주세요").show()
         } else {
-            api.signEdit(hashMapOf(
+            api.signEdit(
+                getToken(this@ProfileEditActivity), hashMapOf(
                 "id" to idSignUpEditText.text,
                 "password" to pwSignUpEditText.text,
                 "name" to nameEditText.text,

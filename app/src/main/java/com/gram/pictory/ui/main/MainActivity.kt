@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
 import com.gram.pictory.R
 import com.gram.pictory.ui.main.Feed.FeedFragment
 import com.gram.pictory.ui.main.Post.PostFragment
@@ -13,6 +14,10 @@ import com.gram.pictory.ui.mypage.MypageFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private var backPressedTime : Long = 0
+    private lateinit var toast: Toast
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,5 +78,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         return super.onContextItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        //super.onBackPressed()
+
+        if (System.currentTimeMillis() > backPressedTime + 2000) {
+            backPressedTime = System.currentTimeMillis()
+            toast = Toast.makeText(this, "뒤로 버튼을 한번 더 누르면 종료됩니다", Toast.LENGTH_SHORT)
+            //Log.i("취소버튼", "${backPressedTime}")
+
+            toast.show()
+            return
+        }
+        if (System.currentTimeMillis() <= backPressedTime + 2000) {
+            //Log.i("취소버튼", "취소완료")
+            super.onBackPressed()
+            toast.cancel()
+        }
     }
 }

@@ -8,6 +8,7 @@ import com.gram.pictory.Adapter.ReplyAdapter
 import com.gram.pictory.Connect.Connecter.api
 import com.gram.pictory.Model.ReplyListModel
 import com.gram.pictory.R
+import com.gram.pictory.Util.getToken
 import kotlinx.android.synthetic.main.activity_reply.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.toast
@@ -28,7 +29,7 @@ class ReplyActivity(): AppCompatActivity() {
         loadReplyList(intent.getIntExtra("postCode", 0))
 
         reply_post_btn.onClick {
-            api.postReply(intent.getIntExtra("postCode", 0),
+            api.postReply(getToken(this@ReplyActivity), intent.getIntExtra("postCode", 0),
                 hashMapOf("text" to reply_edit.text)).enqueue(object: Callback<Unit>{
                 override fun onResponse(call: Call<Unit>?, response: Response<Unit>?) {
                     loadReplyList(intent.getIntExtra("postCode", 0))
@@ -48,7 +49,7 @@ class ReplyActivity(): AppCompatActivity() {
                 response: Response<ArrayList<ReplyListModel>>?
             ) {
                 reply_rv.layoutManager = LinearLayoutManager(this@ReplyActivity)
-                reply_rv.adapter = ReplyAdapter(response!!.body())
+                reply_rv.adapter = ReplyAdapter(response!!.body()!!)
             }
 
             override fun onFailure(call: Call<ArrayList<ReplyListModel>>?, t: Throwable?) {

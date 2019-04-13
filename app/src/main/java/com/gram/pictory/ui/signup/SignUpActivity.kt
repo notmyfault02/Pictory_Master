@@ -5,18 +5,11 @@ import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
-import com.gram.pictory.Connect.Connecter
 import com.gram.pictory.R
 import com.gram.pictory.Util.DataBindingActivity
-import com.gram.pictory.databinding.ActivitySignupBinding
 import kotlinx.android.synthetic.main.activity_signup.*
-import org.jetbrains.anko.sdk27.coroutines.onClick
-import org.jetbrains.anko.toast
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
-class SignUpActivity: DataBindingActivity<ActivitySignupBinding>(), SignUpNavigator {
+class SignUpActivity: DataBindingActivity<com.gram.pictory.databinding.ActivitySignupBinding>(), SignUpNavigator {
 
     override val layoutId: Int
         get() = R.layout.activity_signup
@@ -31,40 +24,6 @@ class SignUpActivity: DataBindingActivity<ActivitySignupBinding>(), SignUpNaviga
         binding.vm = viewModel
 
         binding.setLifecycleOwner(this)
-
-        profileImageView.onClick {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            startActivityForResult(intent, 1)
-        }
-
-        signUpBtn.onClick {
-            if (idSignUpEditText.text.isNullOrBlank() || pwSignUpEditText.text.isNullOrBlank()
-                || nameEditText.text.isNullOrBlank() || birthEditText.text.isNullOrBlank()) {
-                toast("정보를 모두 입력해주세요.").show()
-            } else {
-                Connecter.api.signUp(hashMapOf(
-                    "id" to idSignUpEditText.text,
-                    "password" to pwSignUpEditText.text,
-                    "name" to nameEditText.text,
-                    "birth" to birthEditText.text
-                    )).enqueue(object: Callback<Unit>{
-
-                    override fun onResponse(call: Call<Unit>?, response: Response<Unit>?) {
-                        successSignUp()
-                        toast("회원가입에 성공했습니다.").show()
-                        finish()
-                    }
-
-                    override fun onFailure(call: Call<Unit>?, t: Throwable?) {
-                        failSignUp()
-                        toast("회원가입에 실패했습니다.").show()
-                        finish()
-                    }
-                })
-            }
-        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -75,7 +34,7 @@ class SignUpActivity: DataBindingActivity<ActivitySignupBinding>(), SignUpNaviga
                     val inGallery = contentResolver.openInputStream(data!!.data)
                     val img = BitmapFactory.decodeStream(inGallery)
                     inGallery!!.close()
-                    profileImageView.setImageBitmap(img)
+                    profileImage.setImageBitmap(img)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -84,8 +43,9 @@ class SignUpActivity: DataBindingActivity<ActivitySignupBinding>(), SignUpNaviga
         }
     }
 
-    fun successSignUp(){
+    fun successSignUp() {
         // 토큰 저장
+
     }
 
     fun failSignUp(){
@@ -94,5 +54,12 @@ class SignUpActivity: DataBindingActivity<ActivitySignupBinding>(), SignUpNaviga
 
     override fun intentToLogin() {
         finish()
+    }
+
+    override fun addProfileImage() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, 1)
     }
 }

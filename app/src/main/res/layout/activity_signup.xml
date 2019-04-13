@@ -40,15 +40,17 @@
                         android:layout_height="match_parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent" app:layout_constraintStart_toStartOf="parent"
-                        android:background="@drawable/profile_photo_circular"
                         android:id="@+id/linearLayout2">
 
-                    <ImageView
+                    <de.hdodenhof.circleimageview.CircleImageView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:id="@+id/profileImageView"
+                            android:id="@+id/profileImage"
                             android:src="@drawable/ic_plus"
-                            app:layout_constraintStart_toStartOf="parent"/>
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:background="@drawable/profile_photo_circular"
+                            android:onClick="@{() ->vm.addProfileImage()}"/>
+
                 </LinearLayout>
 
 

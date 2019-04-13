@@ -30,7 +30,7 @@ class FeedFragment: Fragment(), FeedClickCallback {
         var feedData = ArrayList<FeedModel>()
         api.getFeed().enqueue(object: Callback<ArrayList<FeedModel>>{
             override fun onResponse(call: Call<ArrayList<FeedModel>>?, response: Response<ArrayList<FeedModel>>?) {
-                feedData = response!!.body()
+                feedData = response!!.body()!!
             }
 
             override fun onFailure(call: Call<ArrayList<FeedModel>>?, t: Throwable?) {
