@@ -6,7 +6,7 @@ const User = new Schema({
     username: String,
     id: String,
     pw: String,
-    birth: String,
+    birth: Number,
     active: {type:Boolean,default:false}
 });
 
@@ -24,17 +24,17 @@ User.statics.create = function(username,id,pw,birth) {
 }
 
 // find one user by using username
-User.statics.findOneByEmail = function(id) {
+User.statics.findOneById = function(id) {
     return this.findOne({
         id
-    }).exec()
+    }).exec();
 }
 
 
 
 // verify the password of the User documment
-User.methods.verify = function(password) {
-    return this.password === password
+User.methods.verify = function(pw) {
+    return this.pw === pw
 }
 
 

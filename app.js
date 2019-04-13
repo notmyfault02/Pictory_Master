@@ -6,6 +6,8 @@ const express = require('express')
 const api = require('./routes/api');
 const config = require('./config')
 const port = process.env.PORT || 3000;
+//app.use('/show',express.static('uploads'));
+
 
 let app = express();
 app.use(body_parser.urlencoded({extended: false}));
