@@ -26,14 +26,15 @@ class SignUpViewModel(val signUpNavigator: SignUpNavigator) : ViewModel() {
         } else {
             val json = JsonObject().apply {
                 //addProperty("profilePhoto", registerImage)
-                addProperty("name", registerName.value)
+                addProperty("username", registerName.value)
                 addProperty("id", registerId.value)
-                addProperty("password", registerPw.value)
+                addProperty("pw", registerPw.value)
                 addProperty("birth", registerBirth.value)
             }
             Connecter.api.signUp(json).enqueue(object: Callback<Unit> {
                 override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
                     Log.d("회원가입", "성공")
+                    Log.d("비밀번호", registerPw.value)
                     Toast.makeText(view.context, "회원가입 성공", Toast.LENGTH_SHORT).show()
                     signUpNavigator.intentToLogin()
                 }

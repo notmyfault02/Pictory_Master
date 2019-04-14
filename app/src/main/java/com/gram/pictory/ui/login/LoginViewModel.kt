@@ -40,8 +40,8 @@ class LoginViewModel(val navigator: LoginNavigator) : ViewModel() {
                             .getAuthDao().insert(auth)
                     }
                     Log.d("로그인", "성공")
-                    saveToken(view.context, response.body()!!.accessToken)
-                    saveToken(view.context, response.body()!!.refreshToken!!, false)
+                    saveToken(view.context, response.body()!!.token)
+                    toMain()
                 }
 
                 override fun onFailure(call: Call<LoginModel>?, t: Throwable?) {
