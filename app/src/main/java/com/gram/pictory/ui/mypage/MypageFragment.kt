@@ -20,7 +20,7 @@ class MypageFragment : DataBindingFragment<FragmentMypageBinding>() {
 
     override val layoutId: Int
         get() = R.layout.fragment_mypage
-    
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val viewModel = ViewModelProviders.of(activity!!).get(MyPageViewModel::class.java)

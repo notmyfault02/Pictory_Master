@@ -1,36 +1,30 @@
 package com.gram.pictory.ui.login
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import com.gram.pictory.R
-import com.gram.pictory.util.DataBindingActivity
 import com.gram.pictory.databinding.ActivityLoginBinding
 import com.gram.pictory.ui.main.MainActivity
 import com.gram.pictory.ui.signup.SignUpActivity
+import com.gram.pictory.util.DataBindingActivity
 import org.jetbrains.anko.startActivity
 
-class LoginActivity : DataBindingActivity<ActivityLoginBinding>(), LoginConstract {
+class LoginActivity : DataBindingActivity<ActivityLoginBinding>() {
 
     override val layoutId: Int
         get() = R.layout.activity_login
 
-    private val factory = LoginViewModelFactory(this)
     private val viewModel: LoginViewModel by lazy {
-        ViewModelProviders.of(this, factory).get(LoginViewModel::class.java)
+        ViewModelProviders.of(this).get(LoginViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = viewModel
-    }
 
-    override fun intentToSignUp() {
-        startActivity<SignUpActivity>()
-    }
-
-    override fun intentToMain() {
-        startActivity<MainActivity>()
-        finish()
+        viewModel.goMainEvent.observe(this, Observer { startActivity<MainActivity>() })
+        viewModel.goRegisterEvent.observe(this, Observer { startActivity<SignUpActivity>() })
     }
 
 }

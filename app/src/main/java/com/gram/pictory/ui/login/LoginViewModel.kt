@@ -1,23 +1,28 @@
 package com.gram.pictory.ui.login
 
+import android.app.Application
+import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
-import android.arch.lifecycle.ViewModel
 import android.view.View
 import android.widget.Toast
 import com.google.gson.JsonObject
-import com.gram.pictory.util.saveToken
 import com.gram.pictory.connect.Connecter
 import com.gram.pictory.database.Auth
 import com.gram.pictory.database.AuthDatabase
 import com.gram.pictory.model.LoginModel
+import com.gram.pictory.util.SingleLiveEvent
+import com.gram.pictory.util.saveToken
 import org.jetbrains.anko.doAsync
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class LoginViewModel(val constract: LoginConstract) : ViewModel() {
+class LoginViewModel(val app: Application) : AndroidViewModel(app) {
     val loginId = MutableLiveData<String>()
     val loginPw = MutableLiveData<String>()
+
+    val goMainEvent = SingleLiveEvent<Any>()
+    val goRegisterEvent = SingleLiveEvent<Any>()
 
     fun doLogin(view: View) {
         if (loginId.isValueBlank()) {
@@ -49,8 +54,8 @@ class LoginViewModel(val constract: LoginConstract) : ViewModel() {
         }
     }
 
-    fun toSignUpBtn() = constract.intentToSignUp()
-    fun toMain() = constract.intentToMain()
+    fun toSignUpBtn() = goRegisterEvent.call()
+    fun toMain() = goMainEvent.call()
 
     fun MutableLiveData<String>.isValueBlank() = this.value.isNullOrBlank()
 }
