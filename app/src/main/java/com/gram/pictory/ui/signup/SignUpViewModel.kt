@@ -6,13 +6,13 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.google.gson.JsonObject
-import com.gram.pictory.Connect.Connecter
+import com.gram.pictory.connect.Connecter
 import de.hdodenhof.circleimageview.CircleImageView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class SignUpViewModel(val signUpNavigator: SignUpNavigator) : ViewModel() {
+class SignUpViewModel(val signUpNavigator: SignUpConstract) : ViewModel() {
     val registerImage = MutableLiveData<CircleImageView>()
     val registerName = MutableLiveData<String>()
     val registerId = MutableLiveData<String>()

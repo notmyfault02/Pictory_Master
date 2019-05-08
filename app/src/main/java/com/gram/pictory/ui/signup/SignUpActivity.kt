@@ -6,10 +6,10 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import com.gram.pictory.R
-import com.gram.pictory.Util.DataBindingActivity
+import com.gram.pictory.util.DataBindingActivity
 import kotlinx.android.synthetic.main.activity_signup.*
 
-class SignUpActivity: DataBindingActivity<com.gram.pictory.databinding.ActivitySignupBinding>(), SignUpNavigator {
+class SignUpActivity: DataBindingActivity<com.gram.pictory.databinding.ActivitySignupBinding>(), SignUpConstract {
 
     override val layoutId: Int
         get() = R.layout.activity_signup

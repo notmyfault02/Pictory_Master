@@ -3,13 +3,13 @@ package com.gram.pictory.ui.login
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import com.gram.pictory.R
-import com.gram.pictory.Util.DataBindingActivity
+import com.gram.pictory.util.DataBindingActivity
 import com.gram.pictory.databinding.ActivityLoginBinding
 import com.gram.pictory.ui.main.MainActivity
 import com.gram.pictory.ui.signup.SignUpActivity
 import org.jetbrains.anko.startActivity
 
-class LoginActivity : DataBindingActivity<ActivityLoginBinding>(), LoginNavigator {
+class LoginActivity : DataBindingActivity<ActivityLoginBinding>(), LoginConstract {
 
     override val layoutId: Int
         get() = R.layout.activity_login
@@ -22,7 +22,6 @@ class LoginActivity : DataBindingActivity<ActivityLoginBinding>(), LoginNavigato
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = viewModel
-
     }
 
     override fun intentToSignUp() {

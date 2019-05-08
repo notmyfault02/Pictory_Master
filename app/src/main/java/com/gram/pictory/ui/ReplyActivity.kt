@@ -4,11 +4,11 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
-import com.gram.pictory.Adapter.ReplyAdapter
-import com.gram.pictory.Connect.Connecter.api
-import com.gram.pictory.Model.ReplyListModel
+import com.gram.pictory.adapter.ReplyAdapter
+import com.gram.pictory.connect.Connecter.api
+import com.gram.pictory.model.ReplyListModel
 import com.gram.pictory.R
-import com.gram.pictory.Util.getToken
+import com.gram.pictory.util.getToken
 import kotlinx.android.synthetic.main.activity_reply.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.toast

@@ -3,10 +3,10 @@ package com.gram.pictory.ui
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
-import com.gram.pictory.Adapter.FollowerAdapter
-import com.gram.pictory.Connect.Connecter.api
-import com.gram.pictory.Model.FollowerModel
 import com.gram.pictory.R
+import com.gram.pictory.adapter.FollowerAdapter
+import com.gram.pictory.connect.Connecter.api
+import com.gram.pictory.model.FollowerModel
 import kotlinx.android.synthetic.main.activity_follwer.*
 import org.jetbrains.anko.toast
 import retrofit2.Call

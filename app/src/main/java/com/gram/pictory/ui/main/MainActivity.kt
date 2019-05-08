@@ -8,8 +8,8 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import com.gram.pictory.R
-import com.gram.pictory.ui.main.Feed.FeedFragment
-import com.gram.pictory.ui.main.Post.PostFragment
+import com.gram.pictory.ui.main.feed.FeedFragment
+import com.gram.pictory.ui.main.post.PostFragment
 import com.gram.pictory.ui.mypage.MypageFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
