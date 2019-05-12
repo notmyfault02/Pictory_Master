@@ -2,47 +2,32 @@ package com.gram.pictory.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import com.bumptech.glide.Glide
-import com.gram.pictory.R
-import com.gram.pictory.util.FeedClickCallback
+import com.gram.pictory.databinding.ItemFeedRecyclerviewBinding
 import com.gram.pictory.model.FeedModel
-import org.jetbrains.anko.find
-import org.jetbrains.anko.sdk27.coroutines.onClick
+import com.gram.pictory.ui.main.feed.FeedViewModel
 
-class FeedAdapter(val models: ArrayList<FeedModel>, val callback: FeedClickCallback): RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
+class FeedAdapter(val viewModel: FeedViewModel) : RecyclerView.Adapter<FeedAdapter.FeedViewHolder>() {
+    var item = arrayListOf<FeedModel>()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): FeedViewHolder {
-        val view = LayoutInflater.from(p0.context).inflate(R.layout.item_feed_recyclerview, p0, false)
-        return FeedViewHolder(view)
+        val binding = ItemFeedRecyclerviewBinding.inflate(LayoutInflater.from(p0.context), p0, false)
+        return FeedViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = models.size
+    override fun getItemCount(): Int = item.size
 
-    override fun onBindViewHolder(p0: FeedViewHolder, p1: Int) = p0.bind(models[p1])
+    override fun onBindViewHolder(p0: FeedViewHolder, p1: Int) = p0.bind()
 
-    inner class FeedViewHolder(itemView: View): RecyclerView.ViewHolder(itemView){
-        val user = itemView.find<TextView>(R.id.userTextview)
-        val postImg = itemView.find<ImageView>(R.id.story_img)
-        val likeCount = itemView.find<TextView>(R.id.like_count)
-        val replyCount = itemView.find<TextView>(R.id.reply_count)
-        val postText = itemView.find<TextView>(R.id.post_text)
-
-        fun bind(model: FeedModel) {
-            user.text = model.user
-            likeCount.text = model.likeCount.toString()
-            replyCount.text = model.replyCount.toString()
-            postText.text = model.postText
-
-            Glide.with(postImg)
-                .load(model.imgUrl)
-                .into(postImg)
-
-            postText.onClick {
-                callback.intentToReply(model.postCode, model.imgUrl, model.user, model.postText)
-            }
+    inner class FeedViewHolder(val binding: ItemFeedRecyclerviewBinding) : RecyclerView.ViewHolder(binding.root) {
+        fun bind() {
+            binding.index = adapterPosition
+            binding.viewModel = viewModel
+            binding.feedModel = item[adapterPosition]
         }
     }
 }
