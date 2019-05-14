@@ -1,41 +1,42 @@
 const jwt = require('jsonwebtoken');
 const User = require('../../../models/User');
 const Mypage = require('../../../models/Mypage');
+const Image = require('../../../models/Images');
+
 
 const register = (req, res) => {
     const {
         username,
         id,
         pw,
-        birth
+        birth,
+        profileIMG
     } = req.body
 
     const Usercreate = (user) => {
-        if (user) {
-            throw new Error('user id exists')
-        } else {
-            if(username=='') throw new Error('username is not');
-            if(id=='') throw new Error('id is not');
-            if(pw=='') throw new Error('pw is not');
-            if(birth=='')throw new Error('birth is not');
+        try{
+            if (user) {
+                throw new Error('user id exists')
+            } 
+            else {
+                if(username=='') throw new Error('username is not');
+                if(id=='') throw new Error('id is not');
+                if(pw=='') throw new Error('pw is not');
+                if(birth=='')throw new Error('birth is not');
 
-            res.status(200).json({message:'success signup'});
-            return User.create(username,id,pw,birth);
+                return User.create(username,id,pw,birth,profileIMG);
+            }
         }
+        catch(e){
+
+        }
+        
     }
 
     const Mypagecreate = (user)=>{
-        let mypage = new Mypage();
-        mypage.username = user.username;
-        mypage.id = user.id;
-        mypage.birth=  user.birth;
-        mypage.save((err)=>{
-            if(err){
-                console.error(err);
-                return;
-            }
-            return err;
-        });
+        const {username, id, birth,profileIMG} = user;
+        Image.create(profileIMG,id);
+        return Mypage.create(username,id,birth,profileIMG);
     }
 
     const onError = (error) => {
@@ -49,6 +50,8 @@ const register = (req, res) => {
         .then(Mypagecreate)
         .catch(onError)
 }
+
+
 
 const login = (req,res)=>{
     const {id,pw,active} = req.body;

@@ -7,16 +7,18 @@ const User = new Schema({
     id: String,
     pw: String,
     birth: Number,
-    active: {type:Boolean,default:false}
+    active: {type:Boolean,default:false},
+    profileIMG: String,
 });
 
 
-User.statics.create = function(username,id,pw,birth) {
+User.statics.create = (username,id,pw,birth,profileIMG) =>{
     const user = new this({
         username,
         id,
         pw,
         birth,
+        profileIMG
     })
 
     // return the Promise
@@ -24,7 +26,7 @@ User.statics.create = function(username,id,pw,birth) {
 }
 
 // find one user by using username
-User.statics.findOneById = function(id) {
+User.statics.findOneById = (id)=> {
     return this.findOne({
         id
     }).exec();
@@ -33,7 +35,7 @@ User.statics.findOneById = function(id) {
 
 
 // verify the password of the User documment
-User.methods.verify = function(pw) {
+User.methods.verify = (pw) => {
     return this.pw === pw
 }
 

@@ -1,0 +1,111 @@
+---
+  swagger: "2.0"
+  info: 
+    version: "1.0.0"
+    title: "pictory"
+    description: "pictory"
+    termsOfService: "http://localhost:3000"
+    contact: 
+      name: ""
+    license: 
+      name: "MIT"
+  host: "localhost:3000"
+  basePath: "/docs"
+  schemes: 
+    - "http"
+
+  paths: 
+        
+    /auth/register: 
+      post:
+        description: "회원가입"
+        operationId: register
+        parameters:
+          - 
+            name: "My infomation"
+            in: "body"
+            description: "개인 정보와 프로필 사진 form으로 전송"
+            schema:
+              type: object
+              properties:
+                username:
+                  type: "string"
+                id:
+                  type: "string"
+                pw:
+                  type: "string"
+                birth:
+                  type: "number"
+                active:
+                  type: "boolean"
+                profileIMG:
+                  type: "string"
+        responses:
+          "200":
+            description: "response"
+            schema:
+              properties:
+                messege:
+                  type: "string"
+          default: 
+            description: "unexpected error"
+            schema: 
+              $ref: "#/definitions/ErrorModel"
+
+    /auth/login:
+      post:
+        description: "이름, 전화번호 입력"
+        operationId: login
+        parameters:
+          -
+            name: "login"
+            in: "body"
+            description: "아이디와 비번, 자동로그인 보내기"
+            schema: 
+              type: object
+              properties:
+                id:
+                  type: "string"
+                pw:
+                  type: "string"
+                active:
+                  type: "boolean"
+        responses:
+          "200":
+            description: "response"
+            schema:
+              properties:
+                x-access-token: 
+                  type: "string"
+          default: 
+            description: "unexpected error"
+            schema: 
+              $ref: "#/definitions/ErrorModel"
+            
+    /MyPage/:
+      get:
+        description: "내 정보"
+        operationId: read
+        responses:
+          "200":
+            description: "response"
+            schema:
+              $ref: "#/definitions/MyPage"
+
+    
+   
+  definitions: 
+    MyPage:
+      type: "object"
+      properties:
+        username:
+          type: "string"
+        birth:
+          type: "string"
+        profileIMG:
+          type: "string"
+    ErrorModel: 
+      type: "object"
+      properties: 
+        message: 
+          type: "string"

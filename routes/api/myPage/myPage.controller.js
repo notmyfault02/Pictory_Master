@@ -3,6 +3,10 @@ const jwt = require('jsonwebtoken');
 const multer = require('multer');
 
 const UpdateMypage = (req,res)=>{
+    const token = req.headers['x-access-token'] || req.query.token;
+    const tokenDecoded= jwt.verify(token, req.app.get('jwt-secret'), (err, decoded) => {
+        return decoded;
+    });
     
 }
 

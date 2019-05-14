@@ -6,6 +6,7 @@ const Mypage = new Schema({
     profileIMG: String,
     id: String,
     birth: String,
+    profileIMG: String,
 });
 
 Mypage.static.create = (username,id,birth)=>{
@@ -13,6 +14,7 @@ Mypage.static.create = (username,id,birth)=>{
         username,
         id,
         birth,
+        profileIMG
     });
 
     // return the Promise
