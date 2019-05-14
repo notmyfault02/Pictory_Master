@@ -49,7 +49,7 @@
                             android:src="@drawable/ic_plus"
                             app:layout_constraintStart_toStartOf="parent"
                             android:background="@drawable/profile_photo_circular"
-                            android:onClick="@{() ->vm.addProfileImage()}"/>
+                            android:onClick="@{() ->vm.selectProfileImage()}"/>
 
                 </LinearLayout>
 
@@ -177,7 +177,7 @@
                         android:textColor="#FFFFFF"
                         android:elevation="4dp"
                         android:id="@+id/signUpBtn"
-                        android:onClick="@{(v) -> vm.doSignUp(v)}"
+                        android:onClick="@{() -> vm.doSignUp()}"
                         />
 
                 <View android:layout_width="match_parent"

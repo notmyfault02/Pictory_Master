@@ -1,11 +1,8 @@
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
->
-
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
     <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@drawable/white_grey_border_bottom"
-    >
+            android:background="@drawable/white_grey_border_bottom">
 
         <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
@@ -24,6 +21,7 @@
                         android:textSize="20dp"
                         android:textColor="@color/colorPrimary"
                         android:layout_centerVertical="true"
+                        android:onClick="@{() -> vm.doPrev()}"
                         android:id="@+id/tvPrev"/>
 
                 <TextView

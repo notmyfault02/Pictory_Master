@@ -1,5 +1,6 @@
 package com.gram.pictory.ui.main.post
 
+import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
@@ -9,25 +10,25 @@ import com.gram.pictory.R
 import com.gram.pictory.databinding.ActivityPostNextBinding
 import com.gram.pictory.util.DataBindingActivity
 import kotlinx.android.synthetic.main.activity_post_next.*
-import kotlinx.android.synthetic.main.snippet_top_postbar.*
 import org.jetbrains.anko.imageBitmap
 import org.jetbrains.anko.imageURI
 
 
-class PostNextActivity(constract: PostConstract) : DataBindingActivity<ActivityPostNextBinding>(), PostConstract {
+class PostNextActivity : DataBindingActivity<ActivityPostNextBinding>(){
 
     override val layoutId: Int
         get() = R.layout.activity_post_next
 
-    private val factory = PostViewModelFactory(constract, application)
     private val viewModel: PostViewModel by lazy {
-        ViewModelProviders.of(this, factory).get(PostViewModel::class.java)
+        ViewModelProviders.of(this).get(PostViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding.vm = viewModel
+
+        viewModel.doPrevEvent.observe(this, Observer { finish() })
 
         postEditText.setHorizontallyScrolling(false)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
@@ -39,8 +40,5 @@ class PostNextActivity(constract: PostConstract) : DataBindingActivity<ActivityP
 
         postImage.imageBitmap = (postImage.drawable as BitmapDrawable).bitmap
 
-        tvPrev.setOnClickListener {
-            finish()
-        }
     }
 }

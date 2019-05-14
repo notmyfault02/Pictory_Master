@@ -2,25 +2,18 @@ package com.gram.pictory.ui.main.post
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.MutableLiveData
-import com.gram.pictory.util.LifecycleCallback
-import com.gram.pictory.util.getToken
 import com.gram.pictory.connect.Connecter
+import com.gram.pictory.util.SingleLiveEvent
+import com.gram.pictory.util.getToken
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class PostViewModel(val constract: PostConstract, val app: Application): AndroidViewModel(app), LifecycleCallback {
+class PostViewModel(val app: Application): AndroidViewModel(app){
     val postEditTextView = MutableLiveData<String>()
 
-    override fun apply(event: Lifecycle.Event) {
-        when(event){
-            Lifecycle.Event.ON_RESUME -> {
-
-            }
-        }
-    }
+    val doPrevEvent = SingleLiveEvent<Any>()
 
     fun post() {
         val map = hashMapOf(
@@ -37,4 +30,6 @@ class PostViewModel(val constract: PostConstract, val app: Application): Android
             }
         })
     }
+
+    fun doPrev() = doPrevEvent.call()
 }

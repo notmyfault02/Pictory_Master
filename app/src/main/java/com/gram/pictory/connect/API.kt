@@ -2,15 +2,24 @@ package com.gram.pictory.connect
 
 import com.google.gson.JsonObject
 import com.gram.pictory.model.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
 interface API {
 
     //회원가입
+    @Multipart
     @POST("api/auth/register")
     @Headers("Content-Type:application/json")
-    fun signUp(@Body body: JsonObject): Call<Unit>
+    fun signUp(
+        @Part image: MultipartBody.Part,
+        @Part("username") userName: RequestBody,
+        @Part("id") id: RequestBody,
+        @Part("pw") pw: RequestBody,
+        @Part("birth") birth: RequestBody
+    ): Call<Unit>
 
     //로그인
     @POST("api/auth/login")

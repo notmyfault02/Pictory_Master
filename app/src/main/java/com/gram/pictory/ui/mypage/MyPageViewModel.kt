@@ -23,7 +23,7 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
             Lifecycle.Event.ON_RESUME -> {
                 Connecter.api.getUserInfo(getToken(app.applicationContext), Unit).enqueue(object: Callback<UserModel> {
                     override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
-                        userName.value = response.body()!!.userName
+                        userName.value = response.body()!!.username
                     }
 
                     override fun onFailure(call: Call<UserModel>, t: Throwable) {
