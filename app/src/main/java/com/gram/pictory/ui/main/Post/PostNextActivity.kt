@@ -30,15 +30,17 @@ class PostNextActivity : DataBindingActivity<ActivityPostNextBinding>(){
 
         viewModel.doPrevEvent.observe(this, Observer { finish() })
 
-        postEditText.setHorizontallyScrolling(false)
+        postnext_text_tv.setHorizontallyScrolling(false)
         window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
 
 
         val path = intent.getStringExtra("path")
-        if (path.contains("noPath")) postImage.setImageResource(R.drawable.ic_launcher_background)
-        else postImage.imageURI = Uri.parse(path)
 
-        postImage.imageBitmap = (postImage.drawable as BitmapDrawable).bitmap
+        if (path.contains("noPath")) postnext_image_imv.setImageResource(R.drawable.ic_launcher_background)
+        else postnext_image_imv.imageURI = Uri.parse(path)
+        viewModel.imagePath.value = path
+        postnext_image_imv.imageBitmap = (postnext_image_imv.drawable as BitmapDrawable).bitmap
 
     }
+
 }
