@@ -2,6 +2,7 @@ package com.gram.pictory.connect
 
 import com.google.gson.JsonObject
 import com.gram.pictory.model.*
+import io.reactivex.Single
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -27,13 +28,18 @@ interface API {
     fun login(@Body body: JsonObject): Call<LoginModel>
 
     //글 게시
-    @POST("/post/")
+    @Multipart
+    @POST("post/")
     @Headers("Content-Type:application/json")
-    fun post(@Header("Authorization") token: String, @Body body: Any?): Call<Unit>
+    fun post(
+        @Header("Authorization") token: String,
+        @Part image: MultipartBody.Part,
+        @Part ("text") text: RequestBody
+    ): Call<Unit>
 
     //마이페이지 유저정보 불러오기
-    @GET("{user}")
-    fun getUserInfo(@Header("Authorization") token: String, @Body body: Any?): Call<UserModel>
+    @GET("MyPage/")
+    fun getUserInfo(@Header("Authorization") token: String, @Body body: Any?): Single<UserModel>
 
     //팔로워 불러오기
     @GET("/{followPath}/")

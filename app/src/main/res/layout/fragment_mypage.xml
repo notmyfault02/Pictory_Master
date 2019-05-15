@@ -7,6 +7,8 @@
     <data>
         <variable name="vm"
                   type="com.gram.pictory.ui.mypage.MyPageViewModel"/>
+        <variable name="userModel"
+                  type="com.gram.pictory.model.UserModel"/>
     </data>
 
     <LinearLayout
@@ -34,14 +36,15 @@
                 <de.hdodenhof.circleimageview.CircleImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:id="@+id/imageView3"
+                        android:id="@+id/mypage_profile_imv"
+                        app:profileImage="@{userModel.profileIMG}"
                         app:layout_constraintStart_toStartOf="parent"/>
             </LinearLayout>
             <TextView
-                    android:text="이름"
+                    android:text="@{vm.userName}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" tools:layout_editor_absoluteY="30dp"
-                    android:id="@+id/userName"
+                    android:id="@+id/mypage_username_tv"
                     app:layout_constraintEnd_toEndOf="parent" android:layout_marginEnd="32dp"
                     app:layout_constraintStart_toEndOf="@+id/linearLayout2" android:layout_marginStart="32dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Large"
@@ -50,7 +53,7 @@
                     android:text="프로필 수정"
                     android:layout_width="0dp"
                     android:layout_height="22dp"
-                    android:id="@+id/edit_profile_btn"
+                    android:id="@+id/mypage_edit_profile_btn"
                     android:elevation="4dp"
                     android:onClick="@{()->vm.toEditProfile()}"
                     android:clickable="true"
@@ -65,7 +68,7 @@
 
             <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
                           android:orientation="vertical"
-                          app:layout_constraintBottom_toTopOf="@+id/edit_profile_btn"
+                          app:layout_constraintBottom_toTopOf="@+id/mypage_edit_profile_btn"
                           app:layout_constraintEnd_toEndOf="parent"
                           android:layout_marginEnd="24dp"
                           app:layout_constraintStart_toEndOf="@+id/linearLayout2"

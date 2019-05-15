@@ -22,7 +22,7 @@
                         android:textColor="@color/colorPrimary"
                         android:layout_centerVertical="true"
                         android:onClick="@{() -> vm.doPrev()}"
-                        android:id="@+id/tvPrev"/>
+                        android:id="@+id/postnext_goprev_btn"/>
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -33,7 +33,7 @@
                         android:textSize="20sp"
                         android:textColor="@color/colorPrimary"
                         android:layout_centerVertical="true"
-                        android:id="@+id/tvPost"
+                        android:id="@+id/postnext_gonext_btn"
                         android:onClick="@{() -> vm.post()}"
                 />
 

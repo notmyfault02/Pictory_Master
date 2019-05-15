@@ -39,7 +39,7 @@ class MypageFragment : DataBindingFragment<FragmentMypageBinding>() {
 
         myPageNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener)
 
-        edit_profile_btn.setOnClickListener(View.OnClickListener {
+        mypage_edit_profile_btn.setOnClickListener(View.OnClickListener {
             Log.d("hello", "Hello")
         })
     }
@@ -75,10 +75,6 @@ class MypageFragment : DataBindingFragment<FragmentMypageBinding>() {
             }
         }
         return super.onContextItemSelected(item)
-    }
-
-    fun goToEditProfile() {
-        startActivity<ProfileEditActivity>()
     }
 
 }
