@@ -1,8 +1,6 @@
 const jwt = require('jsonwebtoken');
 const User = require('../../../models/User');
-const Mypage = require('../../../models/Mypage');
-const Image = require('../../../models/Images');
-
+const fs = require('fs');
 
 const register = (req, res) => {
     const {
@@ -10,33 +8,17 @@ const register = (req, res) => {
         id,
         pw,
         birth,
+        active,
         profileIMG
     } = req.body
 
-    const Usercreate = (user) => {
-        try{
-            if (user) {
-                throw new Error('user id exists')
-            } 
-            else {
-                if(username=='') throw new Error('username is not');
-                if(id=='') throw new Error('id is not');
-                if(pw=='') throw new Error('pw is not');
-                if(birth=='')throw new Error('birth is not');
-
-                return User.create(username,id,pw,birth,profileIMG);
-            }
+    const create = (user) => {
+        if (user) {
+            throw new Error('user id exists')
+        } else {
+            res.status(200).json({message:'success signup'});
+            return User.create(username,id,pw,birth,active,profileIMG);
         }
-        catch(e){
-
-        }
-        
-    }
-
-    const Mypagecreate = (user)=>{
-        const {username, id, birth,profileIMG} = user;
-        Image.create(profileIMG,id);
-        return Mypage.create(username,id,birth,profileIMG);
     }
 
     const onError = (error) => {
@@ -46,15 +28,12 @@ const register = (req, res) => {
     }
 
     User.findOneById(id)
-        .then(Usercreate)
-        .then(Mypagecreate)
+        .then(create)
         .catch(onError)
 }
 
-
-
 const login = (req,res)=>{
-    const {id,pw,active} = req.body;
+    const {id,pw} = req.body;
     const secret = req.app.get('jwt-secret');
 
     const check = (user) => {
@@ -65,17 +44,10 @@ const login = (req,res)=>{
         } else {
             // user exists, check the password
             if(user.verify(pw)) {
-                user.active = active;
-                user.save((err)=>{
-                    if(err) throw new Error(err);
-                });
-                console.log(user);
                 // create a promise that generates jwt asynchronously
-                return new Promise((resolve, reject) => {
+                const p = new Promise((resolve, reject) => {
                     jwt.sign(
                         {
-                            username:user.username,
-                            active:user.active,
                             id: user.id,
                             pw:user.pw,
                         }, 
@@ -89,6 +61,7 @@ const login = (req,res)=>{
                             resolve(token)
                         });
                 }); 
+                return p;
             } else {
                 throw new Error('login failed');
             }
@@ -96,7 +69,7 @@ const login = (req,res)=>{
     }
 
     // respond the token 
-    const respond = (token) => {        
+    const respond = (token) => {
         res.json({
             message: 'logged in successfully',
             token,
@@ -119,5 +92,5 @@ const login = (req,res)=>{
 
 module.exports = {
     login,
-    register
+    register,
 }

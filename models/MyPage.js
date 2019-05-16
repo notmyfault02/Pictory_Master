@@ -3,13 +3,12 @@ const Schema = mongoose.Schema
 
 const Mypage = new Schema({
     username: String,
-    profileIMG: String,
     id: String,
     birth: String,
     profileIMG: String,
 });
 
-Mypage.static.create = (username,id,birth)=>{
+Mypage.static.create = (username,id,birth,profileIMG)=>{
     const mypage = new this({
         username,
         id,

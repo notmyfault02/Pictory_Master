@@ -6,7 +6,7 @@ const multer = require('multer');
 
 let _storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, 'uploads/')
+      cb(null, 'Images');
     },
     filename: function (req, file, cb) {
       cb(null, file.originalname);
@@ -14,7 +14,7 @@ let _storage = multer.diskStorage({
 });
 let upload = multer({ storage: _storage });
 
-router.post('/register',upload.single('userfile'),controller.register);
+router.post('/register',upload.single('myfile'),controller.register);
 router.post('/login',controller.login);
 
 module.exports = router;
