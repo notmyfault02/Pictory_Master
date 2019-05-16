@@ -15,8 +15,6 @@ import kotlinx.android.synthetic.main.activity_signup.*
 
 class SignUpActivity: DataBindingActivity<com.gram.pictory.databinding.ActivitySignupBinding>() {
 
-    val imagePath= String
-
     override val layoutId: Int
         get() = R.layout.activity_signup
 
@@ -30,9 +28,6 @@ class SignUpActivity: DataBindingActivity<com.gram.pictory.databinding.ActivityS
         viewModel.doLoginEvent.observe(this, Observer { finish() })
         viewModel.addImageEvent.observe(this, Observer {
             val intent = Intent()
-            //val realPath = getRealPathFromURI(intent.data)
-            //viewModel.imagePath.value = intent.data
-            //Log.d("hello", viewModel.imagePath.value)
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
             startActivityForResult(intent, 1) })

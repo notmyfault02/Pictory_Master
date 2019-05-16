@@ -13,7 +13,6 @@ interface API {
     //회원가입
     @Multipart
     @POST("api/auth/register")
-    @Headers("Content-Type:application/json")
     fun signUp(
         @Part image: MultipartBody.Part,
         @Part("username") userName: RequestBody,
@@ -28,9 +27,9 @@ interface API {
     fun login(@Body body: JsonObject): Call<LoginModel>
 
     //글 게시
+    //완료
     @Multipart
     @POST("post/")
-    @Headers("Content-Type:application/json")
     fun post(
         @Header("Authorization") token: String,
         @Part image: MultipartBody.Part,
@@ -39,9 +38,10 @@ interface API {
 
     //마이페이지 유저정보 불러오기
     @GET("MyPage/")
-    fun getUserInfo(@Header("Authorization") token: String, @Body body: Any?): Single<UserModel>
+    fun getUserInfo(@Header("Authorization") token: String): Single<UserModel>
 
     //팔로워 불러오기
+
     @GET("/{followPath}/")
     @Headers("Content-Type:application/json")
     fun getFollower(@Path("followPath") followPath: String): Call<ArrayList<FollowerModel>>
@@ -72,9 +72,13 @@ interface API {
     fun postReply(@Header("Authorization") token: String, @Path("postCode") postCode: Int, @Body body: Any?): Call<Unit>
 
     //프로필 수정
+    @Multipart
     @PATCH("/postEdit/")
-    @Headers("Content-Type:application/json")
-    fun signEdit(@Header("Authorization") token: String, @Body body: Any?): Call<Unit>
-
+    fun profileEdit(
+        @Header("Authorization") token: String,
+        @Part("username") userName: RequestBody,
+        @Part("id") id: RequestBody,
+        @Part("birth") birth: RequestBody
+    ): Single<Unit>
 
 }

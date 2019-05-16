@@ -39,13 +39,6 @@ class SignUpViewModel(val app: Application) : AndroidViewModel(app) {
             || registerPw.isValueBlank()|| registerBirth.isValueBlank()) {
             Toast.makeText(app.baseContext,"정보를 모두 입력해주세요.", Toast.LENGTH_SHORT).show()
         } else {
-//            val json = JsonObject().apply {
-//                //addProperty("profilePhoto", filePart)
-//                addProperty("username", registerName.value)
-//                addProperty("id", registerId.value)
-//                addProperty("pw", registerPw.value)
-//                addProperty("birth", registerBirth.value)
-//            }
             Connecter.api.signUp(filePart, getData(registerName.value!!), getData(registerId.value!!), getData(registerPw.value!!), getData(registerBirth.value!!))
                 .enqueue(object: Callback<Unit> {
                 override fun onResponse(call: Call<Unit>, response: Response<Unit>) {

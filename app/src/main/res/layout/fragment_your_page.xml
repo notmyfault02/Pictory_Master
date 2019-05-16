@@ -90,7 +90,7 @@
                           android:layout_weight="1">
 
                 <TextView
-                        android:id="@+id/count_post"
+                        android:id="@+id/mypage_postcount_tv"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -98,7 +98,7 @@
                         android:textColor="#FFFFFF"
                         android:gravity="center"/>
                 <TextView
-                        android:id="@+id/count_following"
+                        android:id="@+id/mypage_followingcount_tv "
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -106,7 +106,7 @@
                         android:textColor="#FFFFFF"
                         android:gravity="center"/>
                 <TextView
-                        android:id="@+id/count_follower"
+                        android:id="@+id/mypage_followercount_tv"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="1"

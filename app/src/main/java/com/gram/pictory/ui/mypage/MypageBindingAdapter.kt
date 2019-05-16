@@ -5,6 +5,6 @@ import com.bumptech.glide.Glide
 import de.hdodenhof.circleimageview.CircleImageView
 
 @BindingAdapter("app:profileImage")
-fun getProfileImage(imageView: CircleImageView, imagePath: String) {
+fun getProfileImage(imageView: CircleImageView, imagePath: String?) {
     Glide.with(imageView.context).load(imagePath).centerCrop().into(imageView)
 }

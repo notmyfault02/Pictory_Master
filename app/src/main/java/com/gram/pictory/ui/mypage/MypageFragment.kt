@@ -4,14 +4,13 @@ import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.support.design.widget.BottomNavigationView
-import android.util.Log
 import android.view.ContextMenu
 import android.view.MenuItem
 import android.view.View
 import com.gram.pictory.R
 import com.gram.pictory.databinding.FragmentMypageBinding
 import com.gram.pictory.ui.FollowerActivity
-import com.gram.pictory.ui.ProfileEditActivity
+import com.gram.pictory.ui.profileEdit.ProfileEditActivity
 import com.gram.pictory.util.DataBindingFragment
 import kotlinx.android.synthetic.main.fragment_mypage.*
 import org.jetbrains.anko.support.v4.startActivity
@@ -31,6 +30,8 @@ class MypageFragment : DataBindingFragment<FragmentMypageBinding>() {
         }
 
         viewModel.doEditEvent.observe(this, Observer { startActivity<ProfileEditActivity>() })
+        viewModel.goFollowerListEvent.observe(this, Observer { startActivity<FollowerActivity>() })
+        viewModel.goFollowingListEvent.observe(this, Observer { startActivity<FollowerActivity>() })
 
         fragmentManager?.beginTransaction().run {
             this!!.replace(R.id.myPageFrame, MyPostFragment())
@@ -39,9 +40,6 @@ class MypageFragment : DataBindingFragment<FragmentMypageBinding>() {
 
         myPageNavigationView.setOnNavigationItemSelectedListener(navigationItemSelectedListener)
 
-        mypage_edit_profile_btn.setOnClickListener(View.OnClickListener {
-            Log.d("hello", "Hello")
-        })
     }
 
     private val navigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->

@@ -22,7 +22,7 @@
         </activity>
         <activity android:name=".ui.main.MainActivity"/>
         <activity android:name="com.gram.pictory.ui.signup.SignUpActivity"/>
-        <activity android:name=".ui.ProfileEditActivity"/>
+        <activity android:name=".ui.profileEdit.ProfileEditActivity"/>
         <activity android:name=".ui.FollowerActivity"/>
         <activity android:name=".ui.main.post.PostNextActivity"/>
     </application>
