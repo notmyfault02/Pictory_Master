@@ -1,4 +1,4 @@
-package com.gram.pictory.ui
+package com.gram.pictory.ui.follower
 
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity

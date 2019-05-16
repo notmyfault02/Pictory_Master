@@ -31,11 +31,24 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
     val addImageEvent = SingleLiveEvent<Any>()
 
     override fun apply(event: Lifecycle.Event) {
-        when(event) {
-            Lifecycle.Event.ON_RESUME -> {
-                //getMypage()
-            }
-        }
+//        when(event) {
+//            Lifecycle.Event.ON_RESUME -> {
+//                Log.d("Mypage", "resume")
+//                //getMypage()
+//                Connecter.api.getUserInfo(getToken(app.applicationContext))
+//                    .subscribeOn(Schedulers.io())
+//                    .observeOn(AndroidSchedulers.mainThread())
+//                    .subscribe({
+//                        userName.value = it.username
+//                        profileIMG.value = it.myfile
+//                        id.value = it.id
+//                        birth.value = it.birth
+//
+//                    }, {
+//                        Log.d("MyPageVM", "getMyPage Failed")
+//                    })
+//            }
+//        }
     }
 
     fun getMypage() {
@@ -44,7 +57,7 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 userName.value = it.username
-                profileIMG.value = it.profileIMG
+                profileIMG.value = it.myfile
                 id.value = it.id
                 birth.value = it.birth
 

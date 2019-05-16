@@ -11,18 +11,21 @@ import retrofit2.http.*
 interface API {
 
     //회원가입
+    //완료
     @Multipart
-    @POST("api/auth/register")
+    @POST("auth/register")
     fun signUp(
         @Part image: MultipartBody.Part,
         @Part("username") userName: RequestBody,
         @Part("id") id: RequestBody,
         @Part("pw") pw: RequestBody,
-        @Part("birth") birth: RequestBody
+        @Part("birth") birth: RequestBody,
+        @Part("active") active: RequestBody
     ): Call<Unit>
 
     //로그인
-    @POST("api/auth/login")
+    //완료
+    @POST("auth/login")
     @Headers("Content-Type:application/json")
     fun login(@Body body: JsonObject): Call<LoginModel>
 
@@ -37,12 +40,12 @@ interface API {
     ): Call<Unit>
 
     //마이페이지 유저정보 불러오기
-    @GET("MyPage/")
-    fun getUserInfo(@Header("Authorization") token: String): Single<UserModel>
+    @GET("myPage/")
+    fun getUserInfo(@Header("x-access-token") token: String): Single<UserModel>
 
     //팔로워 불러오기
 
-    @GET("/{followPath}/")
+    @GET("{followPath}/")
     @Headers("Content-Type:application/json")
     fun getFollower(@Path("followPath") followPath: String): Call<ArrayList<FollowerModel>>
 
@@ -72,6 +75,7 @@ interface API {
     fun postReply(@Header("Authorization") token: String, @Path("postCode") postCode: Int, @Body body: Any?): Call<Unit>
 
     //프로필 수정
+    //완료
     @Multipart
     @PATCH("/postEdit/")
     fun profileEdit(

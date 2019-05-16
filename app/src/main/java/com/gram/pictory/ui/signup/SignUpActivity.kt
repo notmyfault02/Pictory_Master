@@ -39,7 +39,7 @@ class SignUpActivity: DataBindingActivity<com.gram.pictory.databinding.ActivityS
             val path = data.data
             if (resultCode === Activity.RESULT_OK) {
                 try {
-                    viewModel.imagePath.value = getRealPathFromURI(path)
+                    viewModel.myfile.value = getRealPathFromURI(path)
                     val inGallery = contentResolver.openInputStream(path)
                     val img = BitmapFactory.decodeStream(inGallery)
                     inGallery!!.close()

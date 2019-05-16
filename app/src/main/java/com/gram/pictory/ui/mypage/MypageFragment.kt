@@ -9,7 +9,7 @@ import android.view.MenuItem
 import android.view.View
 import com.gram.pictory.R
 import com.gram.pictory.databinding.FragmentMypageBinding
-import com.gram.pictory.ui.FollowerActivity
+import com.gram.pictory.ui.follower.FollowerActivity
 import com.gram.pictory.ui.profileEdit.ProfileEditActivity
 import com.gram.pictory.util.DataBindingFragment
 import kotlinx.android.synthetic.main.fragment_mypage.*
@@ -28,7 +28,7 @@ class MypageFragment : DataBindingFragment<FragmentMypageBinding>() {
         see_follower.setOnClickListener {
             startActivity<FollowerActivity>()
         }
-
+        viewModel.getMypage()
         viewModel.doEditEvent.observe(this, Observer { startActivity<ProfileEditActivity>() })
         viewModel.goFollowerListEvent.observe(this, Observer { startActivity<FollowerActivity>() })
         viewModel.goFollowingListEvent.observe(this, Observer { startActivity<FollowerActivity>() })
