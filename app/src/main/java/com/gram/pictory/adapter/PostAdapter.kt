@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.gram.pictory.R
 import com.gram.pictory.ui.main.post.PostNextActivity
 import kotlinx.android.synthetic.main.item_photo.view.*
@@ -44,9 +45,14 @@ class PostAdapter(private val context: Context,
     }
 
     override fun onBindViewHolder(holder: PostViewHolder,  position: Int) {
-        val img = decodeSampledBitmapFromURI(albumList[position], 300, 300)
+        val path = albumList[position]
+        val img = decodeSampledBitmapFromURI(albumList[position], 1, 1)
 
-        if(img !=null) holder.itemView.photo.setImageBitmap(img)
+        if (img != null) {
+            Glide.with(context)
+                .load(path).override(300, 300)
+                .into(holder.itemView.photo)
+        }
         else holder.itemView.photo.setImageResource(R.drawable.ic_launcher_background)
 
         holder.itemView.photo.setOnClickListener {
