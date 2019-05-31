@@ -12,7 +12,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:onClick="@{() -> vm.goUserPage()}"
-                android:text="name"
+                android:text="@{vm.userID}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginBottom="8dp"
@@ -110,9 +110,9 @@
 
         <TextView
                 android:id="@+id/feed_content_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="sfsdfsfsadfasfsafsfsfsfsfsfsdf"
+                android:text="@{vm.caption}"
                 android:textSize="18sp"
                 app:layout_constraintTop_toBottomOf="@+id/feed_like_iv"
                 app:layout_constraintStart_toStartOf="parent"

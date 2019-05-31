@@ -19,6 +19,7 @@ class ContentViewModel(val app: Application): AndroidViewModel(app) {
     val userID = MutableLiveData<String>()
     val imgURL = MutableLiveData<String>()
     val likeCheck = MutableLiveData<Boolean>()
+    val caption = MutableLiveData<String>()
     val replyText = MutableLiveData<String>()
 
     val doReply = SingleLiveEvent<Any>()
@@ -32,6 +33,7 @@ class ContentViewModel(val app: Application): AndroidViewModel(app) {
                 postCode.value = it.postCode
                 user.value = it.user
                 imgURL.value = it.imgUrl
+                caption.value = it.caption
                 likeCheck.value = it.likeCheck
                 userID.value = it.userID
             }, {
