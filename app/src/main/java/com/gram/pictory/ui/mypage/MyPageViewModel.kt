@@ -40,7 +40,7 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
         when(event) {
             Lifecycle.Event.ON_RESUME -> {
                 Log.d("Mypage", "resume")
-                getMypage()
+                //getMypage()
             }
         }
     }
@@ -55,25 +55,12 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
                 id.value = it.id
                 birth.value = it.birth
                 imageName.value = it.imageName
+                postPointText.value = it.postCount
+                followerPoiontText.value = it.followerCount
+                followingPointText.value = it.followingCount
             }, {
                 Log.d("MyPageVM", "getMyPage Failed")
             })
-    }
-
-    fun doEditProfile() {
-        Connecter.api.profileEdit(
-            getToken(app.applicationContext),
-            getData(userName.value!!),
-            getData(id.value!!),
-            getData(birth.value!!)
-        ).subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe( {
-                Log.d("프로필수정", "성공")
-            }, {
-                Log.d("프로필수정", "실패")
-            })
-
     }
 
 //    fun getMyPost(): ArrayList<MyPostModel> {
@@ -106,7 +93,9 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
 
     fun toEditProfile() = doEditEvent.call()
 
-    fun toShowFollower() = goFollowerListEvent.call()
+    fun toShowFollower() {
+        goFollowerListEvent.call()
+    }
     fun toShowFollowing() = goFollowingListEvent.call()
     fun selectProfileImage() = addImageEvent.call()
 

@@ -65,9 +65,9 @@ interface API {
 
     //팔로워 불러오기
     //완료
-    @GET("{followPath}/")
+    @GET("{userID}/followerPath/")
     @Headers("Content-Type:application/json")
-    fun getFollower(@Path("followPath") followPath: String): Single<ArrayList<FollowerModel>>
+    fun getFollower(@Header ("Authorization") token: String, @Path("userID") userID: String): Single<ArrayList<FollowerModel>>
 
     //팔로우 취소하기
     @PATCH("/{followPath}/cancel/")

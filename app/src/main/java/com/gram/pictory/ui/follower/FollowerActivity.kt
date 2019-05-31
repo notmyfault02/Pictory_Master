@@ -22,6 +22,7 @@ class FollowerActivity: DataBindingActivity<ActivityFollwerBinding>() {
 
         binding.vm = viewModel
         follower_list_rv.adapter = FollowerAdapter(viewModel)
+        viewModel.userID.value = intent.getStringExtra("id")
         viewModel.setAdapterData()
     }
 
