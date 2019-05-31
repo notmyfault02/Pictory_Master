@@ -11,6 +11,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="@{() -> vm.goUserPage()}"
                 android:text="name"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -124,6 +125,7 @@
                 app:layout_constraintVertical_bias="0.222"/>
 
         <EditText
+                android:text="@{vm.replyText}"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 app:layout_constraintHeight_percent="0.067"
@@ -146,6 +148,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="게시"
+                android:onClick="@{() -> vm.postReply()}"
                 android:textSize="14sp"
                 android:textColor="@color/colorPrimary"
                 app:layout_constraintStart_toStartOf="@+id/feed_post_edit"

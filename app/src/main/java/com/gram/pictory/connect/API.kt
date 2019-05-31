@@ -43,6 +43,13 @@ interface API {
     @GET("myPage/")
     fun getUserInfo(@Header("x-access-token") token: String): Single<UserModel>
 
+    //다른 유저 정보 불러오기
+    @GET("{userID}/")
+    fun getOtherUserInfo(
+        @Header("x-access-token") token: String,
+        @Path("userID") userID: String
+    ): Single<UserModel>
+
     //마이페이지 내가 올린 글 불러오기
     //완료
     @GET("mypost/")
@@ -50,6 +57,7 @@ interface API {
         @Header("Authorization") token: String
     ): Single<ArrayList<MyPostModel>>
 
+    //내가 좋아요 누른 글 보기
     @GET("myLike/")
     fun getMyLike(
         @Header("Authorization") token: String
@@ -82,7 +90,10 @@ interface API {
 
     //댓글 작성
     @POST("/{postCode}/reply/")
-    fun postReply(@Header("Authorization") token: String, @Path("postCode") postCode: Int, @Body body: Any?): Call<Unit>
+    fun postReply(
+        @Header("Authorization") token: String,
+        @Path("postCode") postCode: Int,
+        @Body body: Any?): Call<Unit>
 
     //프로필 수정
     //완료
@@ -95,6 +106,7 @@ interface API {
         @Part("birth") birth: RequestBody
     ): Single<Unit>
 
+    //마이페이지에서 고른 글 보기
     @GET("content/")
     fun getContent(
         @Header("Authorization") token: String
