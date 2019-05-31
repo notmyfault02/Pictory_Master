@@ -37,5 +37,4 @@ abstract class DataBindingFragment<T: ViewDataBinding> : Fragment() {
     private fun notifyEvent(event : Lifecycle.Event) {
         lifecycleOwner.notifyEvent(event)
     }
-
 }

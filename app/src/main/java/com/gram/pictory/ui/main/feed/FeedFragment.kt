@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import com.gram.pictory.R
 import com.gram.pictory.connect.Connecter.api
 import com.gram.pictory.model.FeedModel
-import com.gram.pictory.ui.ReplyActivity
+import com.gram.pictory.ui.reply.ReplyActivity
 import com.gram.pictory.util.FeedClickCallback
 import org.jetbrains.anko.support.v4.startActivity
 import org.jetbrains.anko.support.v4.toast

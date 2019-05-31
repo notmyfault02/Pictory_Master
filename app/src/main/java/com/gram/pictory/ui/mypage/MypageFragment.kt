@@ -20,8 +20,11 @@ class MypageFragment : DataBindingFragment<FragmentMypageBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_mypage
 
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val viewModel = ViewModelProviders.of(activity!!).get(MyPageViewModel::class.java)
         binding.vm = viewModel
         register(binding.vm!!)
@@ -29,7 +32,9 @@ class MypageFragment : DataBindingFragment<FragmentMypageBinding>() {
             startActivity<FollowerActivity>()
         }
         viewModel.getMypage()
-        viewModel.doEditEvent.observe(this, Observer { startActivity<ProfileEditActivity>() })
+        viewModel.doEditEvent.observe(this, Observer { startActivity<ProfileEditActivity>(
+            "userName" to viewModel.userName.value, "profileIMG" to viewModel.profileIMG.value
+        ) })
         viewModel.goFollowerListEvent.observe(this, Observer { startActivity<FollowerActivity>() })
         viewModel.goFollowingListEvent.observe(this, Observer { startActivity<FollowerActivity>() })
 
@@ -48,6 +53,7 @@ class MypageFragment : DataBindingFragment<FragmentMypageBinding>() {
             R.id.mypost -> {
                 transaction?.replace(R.id.myPageFrame, MyPostFragment())
                 transaction?.commit()
+                //viewModel.getMyPost()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.like -> {

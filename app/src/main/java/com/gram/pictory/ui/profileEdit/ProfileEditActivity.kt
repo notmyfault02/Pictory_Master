@@ -26,6 +26,8 @@ class ProfileEditActivity: DataBindingActivity<ActivityProfileEditBinding>() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding.vm = viewModel
+
+        profileedit_name_et.setText(intent.getStringExtra("userName"))
         viewModel.addImageEvent.observe(this, Observer {
             val intent = Intent()
             intent.type = "image/*"

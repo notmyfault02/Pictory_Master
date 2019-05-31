@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="com.gram.pictory">
+          xmlns:tools="http://schemas.android.com/tools"
+          package="com.gram.pictory">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.INTERNET"/>
@@ -9,11 +10,18 @@
             android:allowBackup="true"
             android:icon="@drawable/ic_like"
             android:label="@string/app_name"
+            android:networkSecurityConfig="@xml/network_security_config"
             android:roundIcon="@drawable/ic_like"
             android:supportsRtl="true"
-            android:networkSecurityConfig="@xml/network_security_config"
-            android:theme="@style/AppTheme" tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="com.gram.pictory.ui.login.LoginActivity">
+            android:theme="@style/AppTheme"
+            tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".ui.YourPage.YourPageActivity">
+        </activity>
+        <activity android:name=".ui.content.ContentActivity">
+        </activity>
+        <activity android:name=".ui.following.FollowingActivity">
+        </activity>
+        <activity android:name=".ui.login.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -21,7 +29,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.main.MainActivity"/>
-        <activity android:name="com.gram.pictory.ui.signup.SignUpActivity"/>
+        <activity android:name=".ui.signup.SignUpActivity"/>
         <activity android:name=".ui.profileEdit.ProfileEditActivity"/>
         <activity android:name=".ui.follower.FollowerActivity"/>
         <activity android:name=".ui.main.post.PostNextActivity"/>

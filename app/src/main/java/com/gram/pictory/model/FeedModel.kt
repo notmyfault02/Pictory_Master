@@ -5,6 +5,7 @@ data class FeedModel (
     var user: String,
     var imgUrl: String,
     var likeCount: Int,
+    var likeCheck: Boolean,
     var replyCount: Int,
     var postText: String
 )

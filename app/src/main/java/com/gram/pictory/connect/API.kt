@@ -43,11 +43,23 @@ interface API {
     @GET("myPage/")
     fun getUserInfo(@Header("x-access-token") token: String): Single<UserModel>
 
-    //팔로워 불러오기
+    //마이페이지 내가 올린 글 불러오기
+    //완료
+    @GET("mypost/")
+    fun getMyPost(
+        @Header("Authorization") token: String
+    ): Single<ArrayList<MyPostModel>>
 
+    @GET("myLike/")
+    fun getMyLike(
+        @Header("Authorization") token: String
+    ): Single<ArrayList<MyPostModel>>
+
+    //팔로워 불러오기
+    //완료
     @GET("{followPath}/")
     @Headers("Content-Type:application/json")
-    fun getFollower(@Path("followPath") followPath: String): Call<ArrayList<FollowerModel>>
+    fun getFollower(@Path("followPath") followPath: String): Single<ArrayList<FollowerModel>>
 
     //팔로우 취소하기
     @PATCH("/{followPath}/cancel/")
@@ -66,12 +78,10 @@ interface API {
 
     //댓글 불러오기
     @GET("/{postCode}/reply/")
-    @Headers("Content-Type:application/json")
-    fun getReply(@Path("postCode") postCode: Int): Call<ArrayList<ReplyListModel>>
+    fun getReply(@Header("Authorization") token: String, @Path("postCode") postCode: Int): Single<ArrayList<ReplyListModel>>
 
     //댓글 작성
     @POST("/{postCode}/reply/")
-    @Headers("Content-Type:application/json")
     fun postReply(@Header("Authorization") token: String, @Path("postCode") postCode: Int, @Body body: Any?): Call<Unit>
 
     //프로필 수정
@@ -85,4 +95,8 @@ interface API {
         @Part("birth") birth: RequestBody
     ): Single<Unit>
 
+    @GET("content/")
+    fun getContent(
+        @Header("Authorization") token: String
+    ): Single<FeedModel>
 }

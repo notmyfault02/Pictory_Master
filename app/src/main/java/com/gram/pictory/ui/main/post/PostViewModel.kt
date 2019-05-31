@@ -17,7 +17,7 @@ import retrofit2.Response
 import java.io.File
 
 class PostViewModel(val app: Application): AndroidViewModel(app){
-    val postText = MutableLiveData<String>()
+    val caption = MutableLiveData<String>()
     val imagePath = MutableLiveData<String>()
 
     val doPrevEvent = SingleLiveEvent<Any>()
@@ -28,10 +28,10 @@ class PostViewModel(val app: Application): AndroidViewModel(app){
         val requestBody=RequestBody.create(MediaType.parse("image/*"),file)
         val filePart = MultipartBody.Part.createFormData("postIMG", file.name, requestBody)
         Log.d("postViewModel", imagePath.value)
-        if (postText.value.isNullOrBlank()) {
+        if (caption.value.isNullOrBlank()) {
             Toast.makeText(app.baseContext, "내용을 입력해주세요", Toast.LENGTH_SHORT).show()
         } else {
-            val requestText = getData(postText.value!!)
+            val requestText = getData(caption.value!!)
             Connecter.api.post(getToken(app.applicationContext), filePart, requestText)
                 .enqueue(object: Callback<Unit> {
                     override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
