@@ -10,5 +10,7 @@ class YourPageActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_your_page)
 
+
+
     }
 }
