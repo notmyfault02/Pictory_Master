@@ -6,7 +6,7 @@ import android.os.Bundle
 import com.gram.pictory.R
 import com.gram.pictory.adapter.FollowerAdapter
 import com.gram.pictory.databinding.ActivityFollwerBinding
-import com.gram.pictory.ui.YourPage.YourPageActivity
+import com.gram.pictory.ui.yourPage.YourPageActivity
 import com.gram.pictory.util.DataBindingActivity
 import kotlinx.android.synthetic.main.activity_follwer.*
 import org.jetbrains.anko.startActivity

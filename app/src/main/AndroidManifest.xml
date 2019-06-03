@@ -15,7 +15,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".ui.YourPage.YourPageActivity">
+        <activity android:name=".ui.yourPage.YourPageActivity">
         </activity>
         <activity android:name=".ui.content.ContentActivity">
         </activity>

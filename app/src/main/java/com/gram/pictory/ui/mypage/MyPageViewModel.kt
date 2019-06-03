@@ -22,9 +22,9 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
     val id = MutableLiveData<String>()
     val birth = MutableLiveData<String>()
     val imageName = MutableLiveData<ArrayList<String>>()
+    val postCode = MutableLiveData<Int>()
 
     val items = MutableLiveData<ArrayList<MyPostModel>>()
-    val selected = MutableLiveData<MyPostModel>()
 
     val postPointText = MutableLiveData<String>().apply {value = "0" }
     val followingPointText = MutableLiveData<String>().apply { value = "0" }
@@ -91,7 +91,17 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
 //            })
 //    }
 
-    fun toEditProfile() = doEditEvent.call()
+
+
+    fun toEditProfile() {
+//        Connecter.api.profileEdit(
+//            getToken(getApplication()),
+//            getData(userName.value!!),
+//            getData(id.value!!),
+//            getData(birth.value!!) )
+//            .enqueue(object: Callback<Unit>)
+
+    }
 
     fun toShowFollower() {
         goFollowerListEvent.call()
@@ -104,7 +114,7 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
     }
 
     fun goContext(index: Int) {
-        selected.value = items.value!![index]
+        postCode.value = items.value!![index].postCode
         doShowContent.call()
     }
 }

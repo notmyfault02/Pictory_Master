@@ -69,6 +69,12 @@ interface API {
     @Headers("Content-Type:application/json")
     fun getFollower(@Header ("Authorization") token: String, @Path("userID") userID: String): Single<ArrayList<FollowerModel>>
 
+    //팔로잉 불러오기
+    //완료
+    @GET("{userID}/followingPath/")
+    @Headers("Content-Type:application/json")
+    fun getFollowing(@Header ("Authorization") token: String, @Path("userID") userID: String): Single<ArrayList<FollowerModel>>
+
     //팔로우 취소하기
     @PATCH("/{followPath}/cancel/")
     @Headers("Content-Type:application/json")
@@ -98,13 +104,13 @@ interface API {
     //프로필 수정
     //완료
     @Multipart
-    @PATCH("/postEdit/")
+    @PATCH("postEdit/")
     fun profileEdit(
         @Header("Authorization") token: String,
         @Part("username") userName: RequestBody,
         @Part("id") id: RequestBody,
         @Part("birth") birth: RequestBody
-    ): Single<Unit>
+    ): Call<Unit>
 
     //마이페이지에서 고른 글 보기
     @GET("content/")

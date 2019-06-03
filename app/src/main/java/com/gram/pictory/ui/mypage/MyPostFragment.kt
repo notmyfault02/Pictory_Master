@@ -30,7 +30,7 @@ class MyPostFragment : DataBindingFragment<FragmentMyPostBinding>() {
         binding.vm = viewModel
         mypost_contentlist_rv.adapter = MyPostAdapter(viewModel)
         //viewModel.getMyPost()
-        viewModel.doShowContent.observe(this, Observer { startActivity<ContentActivity>("selected" to viewModel.selected.value)})
+        viewModel.doShowContent.observe(this, Observer { startActivity<ContentActivity>("postCode" to viewModel.postCode.value)})
         return inflater.inflate(R.layout.fragment_my_post, container, false)
     }
 

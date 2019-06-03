@@ -158,7 +158,7 @@
                         android:textColor="#FFFFFF"
                         android:elevation="4dp"
                         android:id="@+id/profileedt_edit_btn"
-                        android:onClick="@{() -> vm.doEditProfile()}"/>
+                />
 
 
                 <View android:layout_width="match_parent"

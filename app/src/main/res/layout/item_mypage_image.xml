@@ -3,12 +3,13 @@
     <data>
         <variable name="myPostModel" type="com.gram.pictory.model.MyPostModel"/>
         <variable name="vm" type="com.gram.pictory.ui.mypage.MyPageViewModel"/>
+        <variable name="index" type="Integer"/>
 
     </data>
     <ImageView
             android:id="@+id/photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="137dp"
+            android:layout_height="137dp"
             android:scaleType="centerCrop"
             android:adjustViewBounds="true"
             app:image="@{myPostModel.imagePath}"/>

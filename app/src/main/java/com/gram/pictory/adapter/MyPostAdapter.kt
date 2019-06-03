@@ -24,22 +24,13 @@ class MyPostAdapter(val viewModel: MyPageViewModel): RecyclerView.Adapter<MyPost
         return MyPostViewHolder(binding)
     }
 
-//    private fun decodeSampledBitmapFromURI(path: String): Bitmap? {
-//        return BitmapFactory.Options().run {
-//            inJustDecodeBounds = true
-//            BitmapFactory.decodeFile(path, this)
-//
-//            inSampleSize = 300
-//            inJustDecodeBounds = false
-//            BitmapFactory.decodeFile(path, this)
-//        }
-//    }
 
 
     inner class MyPostViewHolder(private val binding: ItemMypageImageBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             binding.vm = viewModel
             binding.myPostModel = item[adapterPosition]
+            binding.index = adapterPosition
         }
     }
 }
