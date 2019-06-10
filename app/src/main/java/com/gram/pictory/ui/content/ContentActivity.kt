@@ -24,6 +24,6 @@ class ContentActivity : DataBindingActivity<ActivityContentBinding>() {
         viewModel.postCode.value = intent.getStringExtra("postCode").toInt()
         viewModel.getContent()
         viewModel.doReply.observe(this, Observer { startActivity<ReplyActivity>("postCode" to viewModel.postCode.value) })
-        viewModel.doUserInfo.observe(this, Observer { startActivity<YourPageActivity>("userID" to viewModel.userID.value) })
+        viewModel.doUserInfo.observe(this, Observer { startActivity<YourPageActivity>("userID" to viewModel.id.value) })
     }
 }

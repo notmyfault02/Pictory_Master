@@ -22,7 +22,7 @@
                     android:layout_height="60dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:image="@{model.postImageUrl}"/>
+                    app:replyimage="@{model.postImageUrl}"/>
 
             <TextView
                     android:id="@+id/reply_username"

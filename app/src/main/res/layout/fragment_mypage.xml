@@ -9,6 +9,8 @@
                   type="com.gram.pictory.ui.mypage.MyPageViewModel"/>
         <variable name="userModel"
                   type="com.gram.pictory.model.UserModel"/>
+        <variable name="user"
+                  type="com.gram.pictory.model.User"/>
     </data>
 
     <LinearLayout
@@ -41,7 +43,7 @@
                         app:layout_constraintStart_toStartOf="parent"/>
             </LinearLayout>
             <TextView
-                    android:text="@{vm.userName}"
+                    android:text="@{vm.username}"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content" tools:layout_editor_absoluteY="30dp"
                     android:id="@+id/mypage_username_tv"

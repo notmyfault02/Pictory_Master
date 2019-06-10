@@ -32,9 +32,9 @@ interface API {
     //글 게시
     //완료
     @Multipart
-    @POST("post/")
+    @POST("post/postcreate")
     fun post(
-        @Header("Authorization") token: String,
+        @Header("x-access-token") token: String,
         @Part image: MultipartBody.Part,
         @Part ("text") text: RequestBody
     ): Call<Unit>
@@ -104,11 +104,10 @@ interface API {
     //프로필 수정
     //완료
     @Multipart
-    @PATCH("postEdit/")
+    @PATCH("Mypage/update_info/")
     fun profileEdit(
         @Header("Authorization") token: String,
-        @Part("username") userName: RequestBody,
-        @Part("id") id: RequestBody,
+        @Part("username") username: RequestBody,
         @Part("birth") birth: RequestBody
     ): Call<Unit>
 

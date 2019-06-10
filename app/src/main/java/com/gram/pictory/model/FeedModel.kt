@@ -2,10 +2,10 @@ package com.gram.pictory.model
 
 data class FeedModel (
     var postCode: Int,
-    var user: String,
-    var userID: String,
-    var caption: String,
-    var imgUrl: String,
+    var username: String,
+    var id: String,
+    var text: String,
+    var imageName: String,
     var likeCount: Int,
     var likeCheck: Boolean,
     var replyCount: Int,

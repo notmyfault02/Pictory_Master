@@ -38,7 +38,7 @@ class PostNextActivity : DataBindingActivity<ActivityPostNextBinding>(){
 
         if (path.contains("noPath")) postnext_image_imv.setImageResource(R.drawable.ic_launcher_background)
         else postnext_image_imv.imageURI = Uri.parse(path)
-        viewModel.imagePath.value = path
+        viewModel.imageName.value = path
         postnext_image_imv.imageBitmap = (postnext_image_imv.drawable as BitmapDrawable).bitmap
 
     }

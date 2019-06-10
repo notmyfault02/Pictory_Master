@@ -17,11 +17,11 @@ import okhttp3.RequestBody
 
 class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCallback {
 
-    val userName = MutableLiveData<String>()
+    val username = MutableLiveData<String>()
     val profileIMG = MutableLiveData<String>()
     val id = MutableLiveData<String>()
     val birth = MutableLiveData<String>()
-    val imageName = MutableLiveData<ArrayList<String>>()
+    val imageName = MutableLiveData<List<String>>()
     val postCode = MutableLiveData<Int>()
 
     val items = MutableLiveData<ArrayList<MyPostModel>>()
@@ -50,14 +50,15 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                userName.value = it.username
-                profileIMG.value = it.myfile
-                id.value = it.id
-                birth.value = it.birth
-                imageName.value = it.imageName
-                postPointText.value = it.postCount
-                followerPoiontText.value = it.followerCount
-                followingPointText.value = it.followingCount
+                Log.d("MypageVM", "" + it.user.username)
+                username.value = it.user.username
+                profileIMG.value = it.user.profileIMG
+                id.value = it.user.id
+                birth.value = it.user.birth
+                imageName.value = it.user.imageName
+                //postPointText.value = it.user.postPointText
+                //followerPoiontText.value = it.followerCount
+                //followingPointText.value = it.followingCount
             }, {
                 Log.d("MyPageVM", "getMyPage Failed")
             })
@@ -91,8 +92,6 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
 //            })
 //    }
 
-
-
     fun toEditProfile() {
 //        Connecter.api.profileEdit(
 //            getToken(getApplication()),
@@ -100,7 +99,7 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
 //            getData(id.value!!),
 //            getData(birth.value!!) )
 //            .enqueue(object: Callback<Unit>)
-
+        doEditEvent.call()
     }
 
     fun toShowFollower() {
@@ -112,6 +111,7 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
     fun getData(st: String): RequestBody {
         return RequestBody.create(MediaType.parse("text/plane"), st)
     }
+
 
     fun goContext(index: Int) {
         postCode.value = items.value!![index].postCode

@@ -92,7 +92,7 @@
                         app:layout_constraintTop_toTopOf="@+id/scrollView2"
                         android:scrollHorizontally="false"
                         android:gravity="start"
-                        android:text="@={vm.caption}"
+                        android:text="@={vm.text}"
                 />
             </ScrollView>
         </android.support.constraint.ConstraintLayout>

@@ -15,11 +15,11 @@ import retrofit2.Response
 class ContentViewModel(val app: Application): AndroidViewModel(app) {
 
     var postCode =  MutableLiveData<Int>()
-    val user = MutableLiveData<String>()
-    val userID = MutableLiveData<String>()
-    val imgURL = MutableLiveData<String>()
+    val username = MutableLiveData<String>()
+    val id = MutableLiveData<String>()
+    val imageName = MutableLiveData<String>()
     val likeCheck = MutableLiveData<Boolean>()
-    val caption = MutableLiveData<String>()
+    val text = MutableLiveData<String>()
     val replyText = MutableLiveData<String>()
 
     val doReply = SingleLiveEvent<Any>()
@@ -31,11 +31,11 @@ class ContentViewModel(val app: Application): AndroidViewModel(app) {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe( {
                 postCode.value = it.postCode
-                user.value = it.user
-                imgURL.value = it.imgUrl
-                caption.value = it.caption
+                username.value = it.username
+                imageName.value = it.imageName
+                text.value = it.text
                 likeCheck.value = it.likeCheck
-                userID.value = it.userID
+                id.value = it.id
             }, {
                 Log.d("ContentVM", "글 불러오기 실패")
             })

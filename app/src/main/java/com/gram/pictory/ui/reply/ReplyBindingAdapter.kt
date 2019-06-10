@@ -14,7 +14,7 @@ fun setCircleImage(imageView: CircleImageView, imagePath: String?) {
     Glide.with(imageView.context).load(imagePath).centerCrop().into(imageView)
 }
 
-@BindingAdapter("image")
+@BindingAdapter("replyimage")
 fun setImage(imageView: ImageView, imagePath: String?) {
     Glide.with(imageView.context).load(imagePath).centerCrop().into(imageView)
 }

@@ -15,7 +15,7 @@ object Connecter{
         val client = OkHttpClient.Builder().addInterceptor(interceptor).build()
         retrofit = Retrofit
             .Builder()
-            .baseUrl("http://172.20.10.3:1212/api/")
+            .baseUrl("http://10.156.145.132:1212/api/")
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)

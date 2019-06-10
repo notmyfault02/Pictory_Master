@@ -148,6 +148,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                app:spanCount="3"
                 android:id="@+id/yourpage_contents_rv">
 
         </android.support.v7.widget.RecyclerView>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="myPostModel" type="com.gram.pictory.model.MyPostModel"/>
+        <variable name="vm" type="com.gram.pictory.ui.yourPage.YourPageViewModel"/>
+        <variable name="index" type="Integer"/>
+
+    </data>
+    <ImageView
+            android:id="@+id/photo"
+            android:layout_width="137dp"
+            android:layout_height="137dp"
+            android:scaleType="centerCrop"
+            android:adjustViewBounds="true"
+            app:image="@{myPostModel.imagePath}"/>
+</layout>

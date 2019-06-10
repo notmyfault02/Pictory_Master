@@ -17,21 +17,21 @@ import retrofit2.Response
 import java.io.File
 
 class PostViewModel(val app: Application): AndroidViewModel(app){
-    val caption = MutableLiveData<String>()
-    val imagePath = MutableLiveData<String>()
+    val text = MutableLiveData<String>()
+    val imageName = MutableLiveData<String>()
 
     val doPrevEvent = SingleLiveEvent<Any>()
 
     fun post() {
-        val file = File(imagePath.value)
+        val file = File(imageName.value)
 
         val requestBody=RequestBody.create(MediaType.parse("image/*"),file)
-        val filePart = MultipartBody.Part.createFormData("postIMG", file.name, requestBody)
-        Log.d("postViewModel", imagePath.value)
-        if (caption.value.isNullOrBlank()) {
+        val filePart = MultipartBody.Part.createFormData("myfile", file.name, requestBody)
+        Log.d("postViewModel", imageName.value)
+        if (text.value.isNullOrBlank()) {
             Toast.makeText(app.baseContext, "내용을 입력해주세요", Toast.LENGTH_SHORT).show()
         } else {
-            val requestText = getData(caption.value!!)
+            val requestText = getData(text.value!!)
             Connecter.api.post(getToken(app.applicationContext), filePart, requestText)
                 .enqueue(object: Callback<Unit> {
                     override fun onResponse(call: Call<Unit>, response: Response<Unit>) {

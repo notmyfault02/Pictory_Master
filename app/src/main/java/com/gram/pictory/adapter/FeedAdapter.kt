@@ -8,8 +8,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.gram.pictory.R
-import com.gram.pictory.util.FeedClickCallback
 import com.gram.pictory.model.FeedModel
+import com.gram.pictory.util.FeedClickCallback
 import org.jetbrains.anko.find
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
@@ -31,17 +31,17 @@ class FeedAdapter(val models: ArrayList<FeedModel>, val callback: FeedClickCallb
         val postText = itemView.find<TextView>(R.id.post_text)
 
         fun bind(model: FeedModel) {
-            user.text = model.user
+            user.text = model.username
             likeCount.text = model.likeCount.toString()
             replyCount.text = model.replyCount.toString()
             postText.text = model.postText
 
             Glide.with(postImg)
-                .load(model.imgUrl)
+                .load(model.imageName)
                 .into(postImg)
 
             postText.onClick {
-                callback.intentToReply(model.postCode, model.imgUrl, model.user, model.postText)
+                callback.intentToReply(model.postCode, model.imageName, model.username, model.text)
             }
         }
     }

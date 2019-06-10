@@ -27,7 +27,6 @@ class ReplyActivity: DataBindingActivity<ActivityReplyBinding>() {
         viewModel.doShowUser.observe(this, Observer { startActivity<YourPageActivity>("userPath" to viewModel.userPath.value) })
         viewModel.postCode.value = intent.getIntExtra("postCode", 0)
         viewModel.loadReplyList()
-
     }
 
 }
