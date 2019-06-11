@@ -11,17 +11,16 @@ import de.hdodenhof.circleimageview.CircleImageView
 
 @BindingAdapter("app:profileImage")
 fun getProfileImage(imageView: CircleImageView, imagePath: String?) {
-    Glide.with(imageView.context).load(imagePath).centerCrop().into(imageView)
+    Glide.with(imageView.context).load(imagePath).centerCrop().override(300,300).into(imageView)
 }
 
 @BindingAdapter("app:mypostItem")
-fun RecyclerView.setBindItem(myPostModel: LiveData<ArrayList<Posts>>) {
+fun RecyclerView.setBindItem(model: LiveData<ArrayList<Posts>>) {
     val adapter: MyPostAdapter = adapter as MyPostAdapter
-
-    myPostModel.value?.let{adapter.item = it}
+    model.value?.let{adapter.item = it}
 }
 
-@BindingAdapter("app:image")
+@BindingAdapter("app:mypostThumbnail")
 fun getMyPostImage(imageView: ImageView, imagePath: String) {
     Glide.with(imageView.context)
         .load(imagePath)

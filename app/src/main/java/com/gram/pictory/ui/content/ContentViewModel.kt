@@ -9,49 +9,51 @@ import com.gram.pictory.util.SingleLiveEvent
 import com.gram.pictory.util.getToken
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import retrofit2.Call
-import retrofit2.Response
+import okhttp3.MediaType
+import okhttp3.RequestBody
 
 class ContentViewModel(val app: Application): AndroidViewModel(app) {
 
-    var postCode =  MutableLiveData<Int>()
+    var _id =  MutableLiveData<String>()
     val username = MutableLiveData<String>()
+    val imagePath = MutableLiveData<String>()
     val id = MutableLiveData<String>()
     val imageName = MutableLiveData<String>()
     val likeCheck = MutableLiveData<Boolean>()
     val text = MutableLiveData<String>()
     val replyText = MutableLiveData<String>()
+    val profilePath = MutableLiveData<String>()
+    val replyPoint = MutableLiveData<String>().apply { value = "0" }
 
     val doReply = SingleLiveEvent<Any>()
     val doUserInfo = SingleLiveEvent<Any>()
 
     fun getContent() {
-        Connecter.api.getContent(getToken(app.applicationContext))
+        Connecter.api.getContent(getToken(app.applicationContext), _id.value!!)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe( {
-                postCode.value = it.postCode
-                username.value = it.username
-                imageName.value = it.imageName
-                text.value = it.text
-                likeCheck.value = it.likeCheck
-                id.value = it.id
+                _id.value = it.posts._id
+                username.value = it.posts.username
+                imageName.value = it.posts.imageName
+                text.value = it.posts.text
+                id.value = it.posts.id
+                imagePath.value = it.posts.imagePath
+                profilePath.value = it.profilePath
+                //replyPoint.value = it.comments.size.toString()
             }, {
-                Log.d("ContentVM", "글 불러오기 실패")
+                Log.d("ContentVM", it.message)
             })
-
     }
 
     fun postReply() {
-        Connecter.api.postReply(getToken(getApplication()), postCode.value!!, replyText)
-            .enqueue(object: retrofit2.Callback<Unit> {
-                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
-                    Log.d("ContentVM", "댓글 달기 성공")
-                }
+        Connecter.api.postReply(getToken(getApplication()), _id.value!!, getData(replyText.value!!))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe( {
 
-                override fun onFailure(call: Call<Unit>, t: Throwable) {
-                    Log.d("ContentVM", "댓글 달기 실패")
-                }
+            }, {
+
             })
     }
 
@@ -63,4 +65,7 @@ class ContentViewModel(val app: Application): AndroidViewModel(app) {
         doReply.call()
     }
 
+    fun getData(st: String): RequestBody {
+        return RequestBody.create(MediaType.parse("text/plane"), st)
+    }
 }

@@ -14,6 +14,7 @@ class MyPostAdapter(val viewModel: MyPageViewModel): RecyclerView.Adapter<MyPost
             field = value
             notifyDataSetChanged()
         }
+
     override fun onBindViewHolder(holder: MyPostViewHolder, position: Int) {
         holder.bind()
     }
@@ -23,8 +24,6 @@ class MyPostAdapter(val viewModel: MyPageViewModel): RecyclerView.Adapter<MyPost
         val binding =  ItemMypageImageBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return MyPostViewHolder(binding)
     }
-
-
 
     inner class MyPostViewHolder(private val binding: ItemMypageImageBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind() {

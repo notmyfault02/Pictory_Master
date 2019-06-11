@@ -9,16 +9,18 @@
             android:layout_height="match_parent"
             tools:context=".ui.mypage.MyPostFragment">
 
-        <android.support.v7.widget.RecyclerView
-                android:id="@+id/mypost_contentlist_rv"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:mypostItem="@{vm.items}"
-                app:layoutManager="android.support.v7.widget.GridLayoutManager"
-                app:spanCount="3">
-        </android.support.v7.widget.RecyclerView>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="match_parent">
+            <android.support.v7.widget.RecyclerView
+                    android:id="@+id/myPost_rv"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:mypostItem="@{vm.items}"
+                    app:layoutManager="android.support.v7.widget.GridLayoutManager"
+                    app:spanCount="3">
+            </android.support.v7.widget.RecyclerView>
 
+        </LinearLayout>
 
     </FrameLayout>
 </layout>

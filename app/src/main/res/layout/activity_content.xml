@@ -14,14 +14,12 @@
                 android:onClick="@{() -> vm.goUserPage()}"
                 android:text="@{vm.id}"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintVertical_bias="0.022"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginEnd="8dp"
-                app:layout_constraintHorizontal_bias="0.043"
-                android:id="@+id/feed_name_tv"/>
+                android:id="@+id/feed_name_tv"
+                app:layout_constraintStart_toEndOf="@+id/content_profile_iv"
+                android:layout_marginStart="8dp"/>
 
         <ImageView
                 android:layout_width="match_parent"
@@ -34,7 +32,7 @@
                 android:src="@mipmap/ic_launcher"
                 android:scaleType="centerCrop"
                 android:id="@+id/feed_img_iv"
-                contentImage="@{vm.imageName}"
+                contentImage="@{vm.imagePath}"
                 app:layout_constraintVertical_bias="0.062"/>
 
         <ImageView
@@ -74,7 +72,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"
-                android:text="12312"
+                android:text="@{vm.replyPoint}"
                 app:layout_constraintTop_toBottomOf="@+id/feed_like_tv"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginEnd="8dp"
@@ -167,5 +165,14 @@
                 android:onClick="@{() -> vm.goReply()}"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/feed_post_edit"/>
+
+        <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp" tools:srcCompat="@tools:sample/backgrounds/scenic"
+                android:id="@+id/content_profile_iv"
+                app:profileImage="@{vm.profilePath}"
+                app:layout_constraintStart_toStartOf="parent" android:layout_marginStart="4dp"
+                app:layout_constraintTop_toTopOf="parent" android:layout_marginTop="4dp"
+                app:layout_constraintBottom_toTopOf="@+id/feed_img_iv" android:layout_marginBottom="4dp"/>
     </android.support.constraint.ConstraintLayout>
 </layout>

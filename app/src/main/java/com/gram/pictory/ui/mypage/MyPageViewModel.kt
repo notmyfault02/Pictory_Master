@@ -2,13 +2,11 @@ package com.gram.pictory.ui.mypage
 
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
-import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
 import com.gram.pictory.connect.Connecter
 import com.gram.pictory.model.Posts
 import com.gram.pictory.model.UserModel
-import com.gram.pictory.util.LifecycleCallback
 import com.gram.pictory.util.SingleLiveEvent
 import com.gram.pictory.util.getToken
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -16,14 +14,16 @@ import io.reactivex.schedulers.Schedulers
 import okhttp3.MediaType
 import okhttp3.RequestBody
 
-class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCallback {
+class MyPageViewModel(val app: Application) : AndroidViewModel(app) {
 
     val username = MutableLiveData<String>()
     val profileIMG = MutableLiveData<String>()
     val id = MutableLiveData<String>()
     val birth = MutableLiveData<String>()
     val imageName = MutableLiveData<List<String>>()
-    val postCode = MutableLiveData<Int>()
+    val imagePath = MutableLiveData<List<String>>()
+    val _id = MutableLiveData<String>()
+    val profilePath = MutableLiveData<String>()
 
     val items = MutableLiveData<ArrayList<Posts>>()
 
@@ -39,16 +39,8 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
     val addImageEvent = SingleLiveEvent<Any>()
     val doShowContent = SingleLiveEvent<Any>()
 
-    override fun apply(event: Lifecycle.Event) {
-        when(event) {
-            Lifecycle.Event.ON_RESUME -> {
-                Log.d("Mypage", "resume")
-                //getMypage()
-            }
-        }
-    }
-// rxjava 사용
     fun getMypage() {
+        var post: ArrayList<Posts>
         Connecter.api.getUserInfo(getToken(app.applicationContext))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -59,38 +51,16 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
                 id.value = it.user.id
                 birth.value = it.user.birth
                 imageName.value = it.user.imageName
-                //postPointText.value = it.user.postPointText
-                //followerPoiontText.value = it.followerCount
-                //followingPointText.value = it.followingCount
+                imagePath.value = it.user.imagePath
+                profilePath.value = it.user.profilePath
+                postPointText.value = it.posts.size.toString()
+                followerPoiontText.value = it.user.follower.size.toString()
+                followingPointText.value = it.user.following.size.toString()
+                post = it.posts
+                items.value = post
+                Log.d("Mypost", items.value!![0].imagePath)
             }, {
                 Log.d("MyPageVM", it.message)
-            })
-    }
-    //rxjava 미사용
-//    fun getMypage() {
-//        Connecter.api.getUserInfo(getToken(app.applicationContext)).enqueue(object: retrofit2.Callback<UserModel> {
-//            override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
-//                model.value = response.body()
-//
-//            }
-//
-//            override fun onFailure(call: Call<UserModel>, t: Throwable) {
-//                Log.d("mypagevm", "failed")
-//            }
-//        })
-//        }
-//    }
-
-    fun getMyPost() {
-
-        Connecter.api.getUserInfo(getToken(app.applicationContext))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                items.value = it.posts
-                Log.d("Mypost", "성공")
-            }, {
-                Log.d("Mypost", "내 글을 불러오는 중 오류가 생겼습니다")
             })
     }
 
@@ -133,8 +103,8 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
     }
 
 
-    fun goContext(index: Int) {
-        postCode.value = items.value!![index].postCode
+    fun goContent(index: Int) {
+        _id.value = items.value!![index]._id
         doShowContent.call()
     }
 }

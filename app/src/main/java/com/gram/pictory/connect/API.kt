@@ -91,29 +91,37 @@ interface API {
     fun getFeed():Call<ArrayList<FeedModel>>
 
     //댓글 불러오기
-    @GET("/{postCode}/reply/")
-    fun getReply(@Header("Authorization") token: String, @Path("postCode") postCode: Int): Single<ArrayList<ReplyListModel>>
+    @GET("feed/{post_id}/writeComments/")
+    fun getReply(@Header("Authorization") token: String, @Path("post_id") post_id: String): Single<ArrayList<ReplyListModel>>
 
     //댓글 작성
-    @POST("/{postCode}/reply/")
+    @POST("feed/{post_id}/writeComments/")
     fun postReply(
-        @Header("Authorization") token: String,
-        @Path("postCode") postCode: Int,
-        @Body body: Any?): Call<Unit>
+        @Header("x-access-token") token: String,
+        @Path("post_id") post_id: String,
+        @Body body: RequestBody): Single<Unit>
 
     //프로필 수정
     //완료
     @Multipart
-    @PATCH("Mypage/update_info/")
+    @PUT("Mypage/update_info/")
     fun profileEdit(
-        @Header("Authorization") token: String,
+        @Header("x-access-token") token: String,
         @Part("username") username: RequestBody,
         @Part("birth") birth: RequestBody
     ): Call<Unit>
 
+    @Multipart
+    @POST("Mypage/update_info/update_profileIMG")
+    fun updateProfile(
+        @Header("x-access-token") token: String,
+        @Part image: MultipartBody.Part
+    ): Single<Unit>
+
     //마이페이지에서 고른 글 보기
-    @GET("content/")
+    @GET("feed/{post_id}/")
     fun getContent(
-        @Header("Authorization") token: String
-    ): Single<FeedModel>
+        @Header("x-access-token") token: String,
+        @Path("post_id") post_id: String
+    ): Single<ContentModel>
 }

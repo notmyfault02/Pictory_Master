@@ -7,11 +7,12 @@
 
     </data>
     <ImageView
+            android:onClick="@{() -> vm.goContent(index)}"
             android:id="@+id/photo"
             android:layout_width="137dp"
             android:layout_height="137dp"
             android:scaleType="centerCrop"
+            app:mypostThumbnail="@{model.imagePath}"
             android:adjustViewBounds="true"
-            android:src="#000000"
-            app:image="@{model.imageName}"/>
+            android:src="#000000"/>
 </layout>

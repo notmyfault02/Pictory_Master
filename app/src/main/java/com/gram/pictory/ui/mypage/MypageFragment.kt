@@ -29,7 +29,6 @@ class MypageFragment : DataBindingFragment<FragmentMypageBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = viewModel
-        register(binding.vm!!)
         viewModel.getMypage()
         Log.d("MypageFragment", "" + viewModel.username.value)
         viewModel.doEditEvent.observe(this, Observer { startActivity<ProfileEditActivity>(
@@ -54,7 +53,6 @@ class MypageFragment : DataBindingFragment<FragmentMypageBinding>() {
             R.id.mypost -> {
                 transaction?.replace(R.id.myPageFrame, MyPostFragment())
                 transaction?.commit()
-                //viewModel.getMyPost()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.like -> {

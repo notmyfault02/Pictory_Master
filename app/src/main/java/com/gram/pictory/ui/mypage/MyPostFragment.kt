@@ -3,9 +3,7 @@ package com.gram.pictory.ui.mypage
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.gram.pictory.R
 import com.gram.pictory.adapter.MyPostAdapter
 import com.gram.pictory.databinding.FragmentMyPostBinding
@@ -19,19 +17,15 @@ class MyPostFragment : DataBindingFragment<FragmentMyPostBinding>() {
     override val layoutId: Int
         get() = R.layout.fragment_my_post
 
-    private val viewModel: MyPageViewModel by lazy {
-        ViewModelProviders.of(this).get(MyPageViewModel::class.java)
-    }
 
-
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        super.onCreateView(inflater, container, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val viewModel = ViewModelProviders.of(activity!!).get(MyPageViewModel::class.java)
         binding.vm = viewModel
-        mypost_contentlist_rv.adapter = MyPostAdapter(viewModel)
-        viewModel.getMyPost()
-        viewModel.doShowContent.observe(this, Observer { startActivity<ContentActivity>("postCode" to viewModel.postCode.value)})
-        return inflater.inflate(R.layout.fragment_my_post, container, false)
+        myPost_rv.adapter = MyPostAdapter(viewModel)
+        viewModel.getMypage()
+        viewModel.doShowContent.observe(this, Observer { startActivity<ContentActivity>("_id" to viewModel._id.value)})
     }
+
 
 }
