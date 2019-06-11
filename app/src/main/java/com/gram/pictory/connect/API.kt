@@ -2,6 +2,7 @@ package com.gram.pictory.connect
 
 import com.google.gson.JsonObject
 import com.gram.pictory.model.*
+import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -42,9 +43,9 @@ interface API {
     fun startFollow(@Path("followPath") followPath: String, @Body body: Any?): Call<Unit>
 
     //피드 불러오기
-    @GET("/feed/")
+    @GET("api/feed/")
     @Headers("Content-Type:application/json")
-    fun getFeed():Call<ArrayList<FeedModel>>
+    fun getFeed(@Header("x-access-token") token: String): Single<ArrayList<FeedModel>>
 
     //댓글 불러오기
     @GET("/{postCode}/reply/")
