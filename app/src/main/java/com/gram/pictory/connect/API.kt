@@ -32,7 +32,7 @@ interface API {
     //글 게시
     //완료
     @Multipart
-    @POST("post/postcreate")
+    @POST("post/postCreate")
     fun post(
         @Header("x-access-token") token: String,
         @Part image: MultipartBody.Part,
@@ -40,7 +40,7 @@ interface API {
     ): Call<Unit>
 
     //마이페이지 유저정보 불러오기
-    @GET("myPage/")
+    @GET("Mypage/")
     fun getUserInfo(@Header("x-access-token") token: String): Single<UserModel>
 
     //다른 유저 정보 불러오기
@@ -52,10 +52,10 @@ interface API {
 
     //마이페이지 내가 올린 글 불러오기
     //완료
-    @GET("mypost/")
-    fun getMyPost(
-        @Header("Authorization") token: String
-    ): Single<ArrayList<MyPostModel>>
+//    @GET("myPage/")
+//    fun getMyPost(
+//        @Header("x-access-token") token: String
+//    ): Single<UserModel>
 
     //내가 좋아요 누른 글 보기
     @GET("myLike/")

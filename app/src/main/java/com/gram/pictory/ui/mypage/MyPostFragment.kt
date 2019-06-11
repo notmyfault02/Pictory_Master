@@ -23,13 +23,13 @@ class MyPostFragment : DataBindingFragment<FragmentMyPostBinding>() {
         ViewModelProviders.of(this).get(MyPageViewModel::class.java)
     }
 
-    private lateinit var myPostAdapter: MyPostAdapter
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
         binding.vm = viewModel
         mypost_contentlist_rv.adapter = MyPostAdapter(viewModel)
-        //viewModel.getMyPost()
+        viewModel.getMyPost()
         viewModel.doShowContent.observe(this, Observer { startActivity<ContentActivity>("postCode" to viewModel.postCode.value)})
         return inflater.inflate(R.layout.fragment_my_post, container, false)
     }

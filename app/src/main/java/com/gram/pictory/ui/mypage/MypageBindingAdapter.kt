@@ -6,7 +6,7 @@ import android.support.v7.widget.RecyclerView
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.gram.pictory.adapter.MyPostAdapter
-import com.gram.pictory.model.MyPostModel
+import com.gram.pictory.model.Posts
 import de.hdodenhof.circleimageview.CircleImageView
 
 @BindingAdapter("app:profileImage")
@@ -14,8 +14,8 @@ fun getProfileImage(imageView: CircleImageView, imagePath: String?) {
     Glide.with(imageView.context).load(imagePath).centerCrop().into(imageView)
 }
 
-@BindingAdapter("app:item")
-fun RecyclerView.setBindItem(myPostModel: LiveData<ArrayList<MyPostModel>>) {
+@BindingAdapter("app:mypostItem")
+fun RecyclerView.setBindItem(myPostModel: LiveData<ArrayList<Posts>>) {
     val adapter: MyPostAdapter = adapter as MyPostAdapter
 
     myPostModel.value?.let{adapter.item = it}

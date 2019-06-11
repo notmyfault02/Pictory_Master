@@ -102,9 +102,12 @@ class ProfileEditActivity : DataBindingActivity<ActivityProfileEditBinding>() {
                             Toast.makeText(this@ProfileEditActivity, "수정 성공", Toast.LENGTH_SHORT).show()
                             finish()
                         }
+                        404 -> {
+                            Log.d("프로필 수정", profileedit_name_et.text.toString())
+                        }
                         500 ->  {
                             Toast.makeText(this@ProfileEditActivity, response.code().toString(), Toast.LENGTH_SHORT).show()
-                            Log.d("회원가입", response.code().toString())
+                            Log.d("프로필 수정", response.code().toString())
                             finish()
                         }
                     }

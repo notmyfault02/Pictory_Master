@@ -48,7 +48,6 @@
                             android:id="@+id/profileImage"
                             android:src="@drawable/ic_plus"
                             app:profileImage="@{vm.profileIMG}"
-                            android:onClick="@{() -> vm.selectProfileImage()}"
                             app:layout_constraintStart_toStartOf="parent"
                             android:background="@drawable/profile_photo_circular"/>
 

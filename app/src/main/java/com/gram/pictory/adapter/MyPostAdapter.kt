@@ -4,12 +4,12 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.gram.pictory.databinding.ItemMypageImageBinding
-import com.gram.pictory.model.MyPostModel
+import com.gram.pictory.model.Posts
 import com.gram.pictory.ui.mypage.MyPageViewModel
 
 class MyPostAdapter(val viewModel: MyPageViewModel): RecyclerView.Adapter<MyPostAdapter.MyPostViewHolder>() {
 
-    var item = arrayListOf<MyPostModel>()
+    var item = arrayListOf<Posts>()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -29,7 +29,7 @@ class MyPostAdapter(val viewModel: MyPageViewModel): RecyclerView.Adapter<MyPost
     inner class MyPostViewHolder(private val binding: ItemMypageImageBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             binding.vm = viewModel
-            binding.myPostModel = item[adapterPosition]
+            binding.model = item[adapterPosition]
             binding.index = adapterPosition
         }
     }

@@ -19,7 +19,6 @@ abstract class DataBindingFragment<T: ViewDataBinding> : Fragment() {
     private val lifecycleOwner = LifecycleOwner()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         binding.lifecycleOwner = this
         rootView = binding.root

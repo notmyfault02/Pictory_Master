@@ -14,6 +14,6 @@ package com.gram.pictory.model
 //)
 
 data class UserModel (
-    val posts: List<Posts>,
+    val posts: ArrayList<Posts>,
     val user: User
 )

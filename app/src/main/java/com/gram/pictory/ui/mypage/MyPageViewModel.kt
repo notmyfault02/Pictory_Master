@@ -6,7 +6,8 @@ import android.arch.lifecycle.Lifecycle
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
 import com.gram.pictory.connect.Connecter
-import com.gram.pictory.model.MyPostModel
+import com.gram.pictory.model.Posts
+import com.gram.pictory.model.UserModel
 import com.gram.pictory.util.LifecycleCallback
 import com.gram.pictory.util.SingleLiveEvent
 import com.gram.pictory.util.getToken
@@ -24,7 +25,9 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
     val imageName = MutableLiveData<List<String>>()
     val postCode = MutableLiveData<Int>()
 
-    val items = MutableLiveData<ArrayList<MyPostModel>>()
+    val items = MutableLiveData<ArrayList<Posts>>()
+
+    val model=MutableLiveData<UserModel>()
 
     val postPointText = MutableLiveData<String>().apply {value = "0" }
     val followingPointText = MutableLiveData<String>().apply { value = "0" }
@@ -44,7 +47,7 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
             }
         }
     }
-
+// rxjava 사용
     fun getMypage() {
         Connecter.api.getUserInfo(getToken(app.applicationContext))
             .subscribeOn(Schedulers.io())
@@ -60,26 +63,36 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
                 //followerPoiontText.value = it.followerCount
                 //followingPointText.value = it.followingCount
             }, {
-                Log.d("MyPageVM", "getMyPage Failed")
+                Log.d("MyPageVM", it.message)
             })
     }
-
-//    fun getMyPost(): ArrayList<MyPostModel> {
-//        var data = ArrayList<MyPostModel>()
+    //rxjava 미사용
+//    fun getMypage() {
+//        Connecter.api.getUserInfo(getToken(app.applicationContext)).enqueue(object: retrofit2.Callback<UserModel> {
+//            override fun onResponse(call: Call<UserModel>, response: Response<UserModel>) {
+//                model.value = response.body()
 //
-//        Connecter.api.getMyPost(getToken(app.applicationContext))
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe({
-//                data = it
-//                for (i in data) {
-//                    items.add(i)
-//                }
-//            }, {
-//                Log.d("에러", "내 글을 불러오는 중 오류가 생겼습니다")
-//            })
-//        return data
+//            }
+//
+//            override fun onFailure(call: Call<UserModel>, t: Throwable) {
+//                Log.d("mypagevm", "failed")
+//            }
+//        })
+//        }
 //    }
+
+    fun getMyPost() {
+
+        Connecter.api.getUserInfo(getToken(app.applicationContext))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                items.value = it.posts
+                Log.d("Mypost", "성공")
+            }, {
+                Log.d("Mypost", "내 글을 불러오는 중 오류가 생겼습니다")
+            })
+    }
 
 //    fun getMyLike() {
 //        Connecter.api.getMyLike(getToken(app.applicationContext))
@@ -95,10 +108,17 @@ class MyPageViewModel(val app: Application) : AndroidViewModel(app), LifecycleCa
     fun toEditProfile() {
 //        Connecter.api.profileEdit(
 //            getToken(getApplication()),
-//            getData(userName.value!!),
-//            getData(id.value!!),
-//            getData(birth.value!!) )
-//            .enqueue(object: Callback<Unit>)
+//            getData(username.value!!),
+//            getData(birth.value!!))
+//            .enqueue(object: Callback<Unit> {
+//                override fun onResponse(call: Call<Unit>, response: Response<Unit>) {
+//                    Log.d("profileEdit", "ok")
+//                }
+//
+//                override fun onFailure(call: Call<Unit>, t: Throwable) {
+//                    Log.d("profileEdit", "error")
+//                }
+//            })
         doEditEvent.call()
     }
 
