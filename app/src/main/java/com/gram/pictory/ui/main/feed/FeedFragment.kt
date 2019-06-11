@@ -21,7 +21,6 @@ override val layoutId: Int
         binding.viewModel = viewModel
         feed_recyclerview.adapter=FeedAdapter(viewModel)
         viewModel.getFeed()
-//        feed_recyclerview.adapter=FeedAdapter()
     }
 
 //    fun setAdapterData() {

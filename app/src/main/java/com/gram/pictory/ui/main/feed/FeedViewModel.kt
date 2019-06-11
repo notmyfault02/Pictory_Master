@@ -3,24 +3,21 @@ package com.gram.pictory.ui.main.feed
 import android.app.Application
 import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
+import android.util.Log
 import com.gram.pictory.connect.Connecter.api
 import com.gram.pictory.model.FeedModel
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 
 class FeedViewModel(val app: Application) : AndroidViewModel(app) {
     val model = MutableLiveData<ArrayList<FeedModel>>()
-    val feedLiveData = model.value
+
     fun getFeed() {
-        api.getFeed().enqueue(object : Callback<ArrayList<FeedModel>> {
-            override fun onResponse(call: Call<ArrayList<FeedModel>>, response: Response<ArrayList<FeedModel>>) {
-                model.value = response.body()
-            }
-
-            override fun onFailure(call: Call<ArrayList<FeedModel>>, t: Throwable) {
-
-            }
-        })
+        api.getFeed("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwdyI6InRlc3QiLCJpZCI6InRlc3QiLCJpYXQiOjE1NjAyNTg3MTUsImV4cCI6MTU2MDYxODcxNSwiaXNzIjoibWUiLCJzdWIiOiJ1c2VyX2luZm8ifQ.M6hbipbZnQm4SIdq0QJHfYfxqzsKj_jnEZIwEJs4Cw4")
+            .subscribeOn(Schedulers.io()).observeOn(
+                AndroidSchedulers.mainThread()
+            ).subscribe({ model.value = it }, {
+                Log.d("오류", "나면 자살함")
+            })
     }
 }
