@@ -86,3 +86,6 @@ app/src/.DS_Store
 .idea/misc.xml
 .project
 .settings/org.eclipse.buildship.core.prefs
+.idea/codeStyles/codeStyleConfig.xml
+.idea/codeStyles/Project.xml
+.idea/encodings.xml
