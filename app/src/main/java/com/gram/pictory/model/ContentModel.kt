@@ -1,6 +1,6 @@
 package com.gram.pictory.model
 
 data class ContentModel(
-    var posts: Posts,
+    var post: Posts,
     var profilePath: String
 )

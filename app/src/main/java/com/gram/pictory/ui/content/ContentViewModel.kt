@@ -5,6 +5,7 @@ import android.arch.lifecycle.AndroidViewModel
 import android.arch.lifecycle.MutableLiveData
 import android.util.Log
 import com.gram.pictory.connect.Connecter
+import com.gram.pictory.model.ContentModel
 import com.gram.pictory.util.SingleLiveEvent
 import com.gram.pictory.util.getToken
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -25,6 +26,8 @@ class ContentViewModel(val app: Application): AndroidViewModel(app) {
     val profilePath = MutableLiveData<String>()
     val replyPoint = MutableLiveData<String>().apply { value = "0" }
 
+    val items = MutableLiveData<ContentModel>()
+
     val doReply = SingleLiveEvent<Any>()
     val doUserInfo = SingleLiveEvent<Any>()
 
@@ -33,14 +36,16 @@ class ContentViewModel(val app: Application): AndroidViewModel(app) {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe( {
-                _id.value = it.posts._id
-                username.value = it.posts.username
-                imageName.value = it.posts.imageName
-                text.value = it.posts.text
-                id.value = it.posts.id
-                imagePath.value = it.posts.imagePath
+                _id.value = it.post._id
+                username.value = it.post.username
+                imageName.value = it.post.imageName
+                text.value = it.post.text
+                id.value = it.post.id
+                imagePath.value = it.post.imagePath
                 profilePath.value = it.profilePath
+                Log.d("제발", "" + _id.value)
                 //replyPoint.value = it.comments.size.toString()
+                //items.value = it
             }, {
                 Log.d("ContentVM", it.message)
             })
