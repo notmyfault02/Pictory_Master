@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/your_post"
+          android:title="유저의 게시물"
+          android:icon="@drawable/ic_table"/>
+</menu>
