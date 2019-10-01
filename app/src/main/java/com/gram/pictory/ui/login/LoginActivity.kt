@@ -23,7 +23,10 @@ class LoginActivity : DataBindingActivity<ActivityLoginBinding>() {
         super.onCreate(savedInstanceState)
         binding.vm = viewModel
 
-        viewModel.goMainEvent.observe(this, Observer { startActivity<MainActivity>() })
+        viewModel.goMainEvent.observe(this, Observer {
+            startActivity<MainActivity>()
+            finish()
+        })
         viewModel.goRegisterEvent.observe(this, Observer { startActivity<SignUpActivity>() })
     }
 

@@ -5,10 +5,10 @@ import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.gram.pictory.R
 import com.gram.pictory.ui.main.post.PostNextActivity
 import kotlinx.android.synthetic.main.item_photo.view.*
@@ -16,37 +16,32 @@ import kotlinx.android.synthetic.main.item_photo.view.*
 class PostAdapter(private val context: Context,
                   private val albumList: ArrayList<String>) : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
-    private fun calculateInSampleSize(options: BitmapFactory.Options, reqWidth: Int, reqHeight: Int): Int {
-        val (height: Int, width: Int) = options.run {outHeight to outWidth}
-        var inSampleSize = 1
+//    var albumList = arrayListOf<String>()
+//        set(value) {
+//            field = value
+//            notifyDataSetChanged()
+//        }
 
-        if (height > reqHeight || width > reqWidth) {
-            val halfHeight: Int = height / 2
-            val halfWidth: Int = width / 2
-
-            Log.e("Post", "이미지 불러오기")
-            while (halfHeight / inSampleSize >= reqHeight && halfWidth / inSampleSize >= reqWidth) {
-                inSampleSize *= 2
-            }
-        }
-        return inSampleSize
-    }
-
-    private fun decodeSampledBitmapFromURI(path: String, reqWidth: Int, reqHeight: Int) : Bitmap? {
+    private fun decodeSampledBitmapFromURI(path: String) : Bitmap? {
         return BitmapFactory.Options().run {
             inJustDecodeBounds = true
             BitmapFactory.decodeFile(path, this)
 
-            inSampleSize = calculateInSampleSize(this, reqWidth, reqHeight)
+            inSampleSize = 300
             inJustDecodeBounds = false
             BitmapFactory.decodeFile(path, this)
         }
     }
 
     override fun onBindViewHolder(holder: PostViewHolder,  position: Int) {
-        val img = decodeSampledBitmapFromURI(albumList[position], 300, 300)
+        val path = albumList[position]
+        val img = decodeSampledBitmapFromURI(albumList[position])
 
-        if(img !=null) holder.itemView.photo.setImageBitmap(img)
+        if (img != null) {
+            Glide.with(context)
+                .load(path).override(300, 300)
+                .into(holder.itemView.photo)
+        }
         else holder.itemView.photo.setImageResource(R.drawable.ic_launcher_background)
 
         holder.itemView.photo.setOnClickListener {
