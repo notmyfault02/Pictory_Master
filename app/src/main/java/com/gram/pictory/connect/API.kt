@@ -88,7 +88,7 @@ interface API {
     //피드 불러오기
     @GET("/feed/")
     @Headers("Content-Type:application/json")
-    fun getFeed():Call<ArrayList<FeedModel>>
+    fun getFeed(@Header("x-access-token") token: String):Single<ArrayList<FeedModel>>
 
     //댓글 불러오기
     @GET("feed/{post_id}/writeComments/")
