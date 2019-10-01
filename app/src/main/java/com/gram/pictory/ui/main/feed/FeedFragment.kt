@@ -12,8 +12,8 @@ import kotlinx.android.synthetic.main.fragment_feed.*
 class FeedFragment: DataBindingFragment<FragmentFeedBinding>() {
 
 
-override val layoutId: Int
-    get() = R.layout.fragment_feed
+    override val layoutId: Int
+        get() = R.layout.fragment_feed
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
