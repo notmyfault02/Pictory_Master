@@ -2,35 +2,33 @@ package com.gram.pictory.adapter
 
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
-import com.bumptech.glide.Glide
+import com.gram.pictory.databinding.ItemReplyListBinding
 import com.gram.pictory.model.ReplyListModel
-import com.gram.pictory.R
-import org.jetbrains.anko.find
+import com.gram.pictory.ui.reply.ReplyViewModel
 
-class ReplyAdapter(val models: ArrayList<ReplyListModel>): RecyclerView.Adapter<ReplyAdapter.ReplyViewHolder>() {
+class ReplyAdapter(val viewModel: ReplyViewModel): RecyclerView.Adapter<ReplyAdapter.ReplyViewHolder>() {
+
+    var items = arrayListOf<ReplyListModel>()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ReplyViewHolder {
-        val view = LayoutInflater.from(p0.context).inflate(R.layout.item_reply_list, p0, false)
-        return ReplyViewHolder(view)
+        val binding = ItemReplyListBinding.inflate(LayoutInflater.from(p0.context), p0, false)
+        return ReplyViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = models.size
+    override fun getItemCount(): Int = items.size
 
-    override fun onBindViewHolder(p0: ReplyViewHolder, p1: Int) = p0.bind(models[p1])
+    override fun onBindViewHolder(p0: ReplyViewHolder, p1: Int) = p0.bind()
 
-    inner class ReplyViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val replyImage = itemView.find<ImageView>(R.id.item_reply_img)
-        val replyName = itemView.find<TextView>(R.id.item_reply_name)
-        val replyText = itemView.find<TextView>(R.id.item_reply_text)
+    inner class ReplyViewHolder(private val binding: ItemReplyListBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(model: ReplyListModel) {
-            Glide.with(replyImage)
-                .load(model.imageUrl).into(replyImage)
-            replyName.text = model.name
-            replyText.text = model.replyText
+        fun bind() {
+            binding.vm = viewModel
+            binding.index = adapterPosition
+            binding.model = items[adapterPosition]
         }
     }
 }
