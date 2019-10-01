@@ -99,8 +99,7 @@ interface API {
     fun postReply(
         @Header("x-access-token") token: String,
         @Path("post_id") post_id: String,
-        @Body body: RequestBody
-    ): Single<Unit>
+        @Body body: RequestBody): Single<Unit>
 
     //프로필 수정
     //완료
