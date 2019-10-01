@@ -19,7 +19,7 @@ class FeedFragment: DataBindingFragment<FragmentFeedBinding>() {
         super.onViewCreated(view, savedInstanceState)
         val viewModel = ViewModelProviders.of(activity!!).get(FeedViewModel::class.java)
         binding.viewModel = viewModel
-        feed_recyclerview.adapter= FeedAdapter(viewModel)
+        feed_recyclerview.adapter=FeedAdapter(viewModel)
         viewModel.getFeed()
     }
 
