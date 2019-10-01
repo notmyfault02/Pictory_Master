@@ -1,13 +1,25 @@
 package com.gram.pictory.model
 
-data class FeedModel (
-    var postCode: Int,
+import com.google.gson.annotations.Expose
+import com.google.gson.annotations.SerializedName
+
+
+data class FeedModel(
+    @SerializedName("username")
+    @Expose
     var username: String,
+    @SerializedName("id")
+    @Expose
     var id: String,
-    var text: String,
+    @SerializedName("liker_id")
+    @Expose
+    var likerId: List<String>,
+    @SerializedName("imageName")
+    @Expose
     var imageName: String,
-    var likeCount: Int,
-    var likeCheck: Boolean,
-    var replyCount: Int,
-    var postText: String
+    @SerializedName("comments")
+    @Expose
+    var comments: List<FeedCommentModel>,
+    var imagePath:String,
+    var text:String?
 )
